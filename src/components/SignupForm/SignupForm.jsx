@@ -1,0 +1,74 @@
+import React from 'react';
+import userService from '../../utils/userService'
+
+class SignupForm extends React.Component {
+  state = {
+    username: '',
+    email: '',
+    password: '',
+    passwordConf: '',
+  };
+
+  handleChange = e => {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  };
+
+  handleSubmit = async e => {
+    e.preventDefault();
+    try {
+      await userService.signup(this.state);
+    } catch (err){
+      console.log(err)
+    }
+  };
+
+  isFormInvalid = () => {
+    return !(this.state.username && this.state.email && this.state.password === this.state.passwordConf);
+  };
+
+  render() {
+    return (
+      <form
+        onSubmit={this.handleSubmit}
+      >
+        <input 
+          type='text'
+          name='username'
+          placeholder='Username'
+          value={this.state.username}
+          onChange={this.handleChange}
+        />
+        <input 
+          type='email'
+          name='email'
+          placeholder='Email address'
+          value={this.state.email}
+          onChange={this.handleChange}
+        />
+        <input 
+          type='password'
+          name='password'
+          placeholder='Password'
+          value={this.state.password}
+          onChange={this.handleChange}
+        />
+        <input 
+          type='password'
+          name='passwordConf'
+          placeholder='Confirm Password'
+          value={this.state.passwordConf}
+          onChange={this.handleChange}
+        />
+        <button
+          type='submit'
+          disabled={this.isFormInvalid()}
+        >Sign Up
+        </button>
+      </form>
+    );
+  }
+}
+
+export default SignupForm;

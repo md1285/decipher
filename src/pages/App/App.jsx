@@ -3,10 +3,10 @@ import './App.css';
 import { Route, Switch } from 'react-router-dom';
 
 import About from '../About/About'
-import Login from '../Login/Login'
-import Signup from '../Signup/Signup'
+import LoginPage from '../LoginPage/LoginPage'
+import SignupPage from '../SignupPage/SignupPage'
 
-import Navbar from '../../components/Navbar'
+import Navbar from '../../components/Navbar/Navbar'
 
 class App extends Component {
   render() {
@@ -31,15 +31,19 @@ class App extends Component {
 
           <Route
             exact path='/login'
-            render={() => (
-              <Login />
+            render={(props) => (
+              <LoginPage 
+                {...props}
+              />
             )}
           />
 
           <Route
             exact path='/signup'
-            render={() => (
-              <Signup />
+            render={(props) => (
+              <SignupPage 
+                {...props}
+              />
             )}
           />
 

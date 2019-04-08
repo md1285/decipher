@@ -18,7 +18,7 @@ app.use(express.static(path.join(__dirname, 'build')));
 
 // API routes
 
-
+app.use('/api/users', require('./routes/api/users'));
 
 // catch-all route
 app.get('/*', function(req, res){
@@ -27,6 +27,6 @@ app.get('/*', function(req, res){
 
 const port = process.env.PORT || 3001;
 
-app.listen(port, function(){
-    console.log(`Express app running on port ${port}.`)
+app.listen(port, function() {
+  console.log(`Express app running on port ${port}.`)
 });

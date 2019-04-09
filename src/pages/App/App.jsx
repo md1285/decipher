@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './App.css';
 import { Route, Switch } from 'react-router-dom';
 
 import About from '../About/About'
@@ -8,11 +7,35 @@ import SignupPage from '../SignupPage/SignupPage'
 
 import Navbar from '../../components/Navbar/Navbar'
 
+import userService from '../../utils/userService'
+
+
 class App extends Component {
+  state = {
+    user: null,
+  };
+
+  async componentDidMount() {
+    this.handleSignupOrLogin();
+  }
+
+  handleSignupOrLogin = () => {
+    this.setState({user: userService.getUser()});
+  }
+
+  handleLogout = () => {
+    userService.logout();
+    this.setState({user: null});
+  }
+
+
   render() {
     return (
       <div className='App'>
-        <Navbar />
+        <Navbar 
+          user={this.state.user}
+          handleLogout={this.handleLogout}
+        />
         <Switch>
 
           <Route
@@ -34,6 +57,7 @@ class App extends Component {
             render={(props) => (
               <LoginPage 
                 {...props}
+                handleSignupOrLogin={this.handleSignupOrLogin}
               />
             )}
           />
@@ -43,6 +67,7 @@ class App extends Component {
             render={(props) => (
               <SignupPage 
                 {...props}
+                handleSignupOrLogin={this.handleSignupOrLogin}
               />
             )}
           />

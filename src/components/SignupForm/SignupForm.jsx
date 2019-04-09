@@ -19,9 +19,10 @@ class SignupForm extends React.Component {
     e.preventDefault();
     try {
       await userService.signup(this.state);
+      this.props.handleSignupOrLogin();
       this.props.history.push('/');
-    } catch (err){
-      console.log(err)
+    } catch (err) {
+      this.props.handleError(err.message);
     }
   };
 
@@ -34,28 +35,28 @@ class SignupForm extends React.Component {
       <form
         onSubmit={this.handleSubmit}
       >
-        <input 
+        <input
           type='text'
           name='userName'
           placeholder='Username'
           value={this.state.userName}
           onChange={this.handleChange}
         />
-        <input 
+        <input
           type='email'
           name='email'
           placeholder='Email address'
           value={this.state.email}
           onChange={this.handleChange}
         />
-        <input 
+        <input
           type='password'
           name='password'
           placeholder='Password'
           value={this.state.password}
           onChange={this.handleChange}
         />
-        <input 
+        <input
           type='password'
           name='passwordConf'
           placeholder='Confirm Password'

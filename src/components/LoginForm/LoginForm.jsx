@@ -1,4 +1,5 @@
 import React from 'react';
+import userService from '../../utils/userService'
 
 class LoginForm extends React.Component {
   state = {
@@ -12,9 +13,17 @@ class LoginForm extends React.Component {
     });
   }
 
-  handleSubmit = e => {
+  handleSubmit = async e => {
     e.preventDefault();
+    try {
+      await userService.login(this.state);
+      this.props.handleSignupOrLogin();
+      this.props.history.push('/');
+    } catch (err) {
+      alert('Invalid Credentials!');
+    }
   };
+
 
   render() {
     return (

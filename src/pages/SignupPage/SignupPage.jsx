@@ -1,10 +1,28 @@
 import React from 'react';
 import SignupForm from '../../components/SignupForm/SignupForm'
 
-const SignupPage = (props) => (
-  <SignupForm
-    history={props.history}
-  />
-);
+class SignupPage extends React.Component {
+
+  state={
+    message: '',
+  };
+
+  handleError = e => {
+    this.setState({message: e});
+  }
+
+  render() {
+    return(
+      <>
+      <SignupForm
+        {...this.props}
+        handleError={this.handleError}
+      />
+      <div>{this.state.message}</div>
+      </>
+    )
+  }
+
+}
 
 export default SignupPage;

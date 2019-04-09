@@ -3,7 +3,7 @@ import userService from '../../utils/userService'
 
 class SignupForm extends React.Component {
   state = {
-    username: '',
+    userName: '',
     email: '',
     password: '',
     passwordConf: '',
@@ -19,13 +19,14 @@ class SignupForm extends React.Component {
     e.preventDefault();
     try {
       await userService.signup(this.state);
+      this.props.history.push('/');
     } catch (err){
       console.log(err)
     }
   };
 
   isFormInvalid = () => {
-    return !(this.state.username && this.state.email && this.state.password === this.state.passwordConf);
+    return !(this.state.userName && this.state.email && this.state.password && this.state.password === this.state.passwordConf);
   };
 
   render() {
@@ -35,9 +36,9 @@ class SignupForm extends React.Component {
       >
         <input 
           type='text'
-          name='username'
+          name='userName'
           placeholder='Username'
-          value={this.state.username}
+          value={this.state.userName}
           onChange={this.handleChange}
         />
         <input 

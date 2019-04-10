@@ -1,5 +1,6 @@
 import React from 'react';
 import chatService from '../../utils/chatService';
+import socket from '../../socket'
 
 class ChatPage extends React.Component {
 
@@ -9,6 +10,7 @@ class ChatPage extends React.Component {
   };
 
   async componentDidMount() {
+    socket.registerApp(this);
     const messages = await chatService.getAllMessages(this.props.match.params.id);
     this.setState({messages})
   }

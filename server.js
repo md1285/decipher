@@ -3,10 +3,14 @@ const path = require('path');
 const favicon = require('serve-favicon');
 const logger = require('morgan');
 
-const app = express();
-
 require('dotenv').config();
 require('./config/database');
+
+const app = express();
+
+// connect socket.io to http server
+const http = require('http').Server(app);
+require('./io').init(http);
 
 app.use(logger('dev'));
 app.use(express.json());

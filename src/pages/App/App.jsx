@@ -17,7 +17,6 @@ class App extends Component {
     user: userService.getUser(),
   };
 
-
   handleSignupOrLogin = () => {
     this.setState({user: userService.getUser()});
   }
@@ -26,7 +25,6 @@ class App extends Component {
     userService.logout();
     this.setState({user: null});
   }
-
 
   render() {
     return (

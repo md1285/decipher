@@ -20,6 +20,12 @@ app.use(express.static(path.join(__dirname, 'build')));
 
 app.use('/api/users', require('./routes/api/users'));
 
+/* adds user to request object for all subsequent routes */
+app.use(require('./config/auth'))
+/* adds user to request object for all subsequent routes */
+
+app.use('/api/chats', require('./routes/api/chats'));
+
 // catch-all route
 app.get('/*', function(req, res){
     res.sendFile(path.join(__dirname, 'build', 'index.html'));

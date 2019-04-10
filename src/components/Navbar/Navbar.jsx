@@ -7,6 +7,7 @@ const Navbar = (props) => {
   <div>
       <NavLink to='/'>Logo</NavLink>
       <NavLink to='/about'>About</NavLink>
+      <NavLink to='/chats'>Chats</NavLink>
       <NavLink to=''
         onClick={props.handleLogout}
       >Log Out</NavLink>

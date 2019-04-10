@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 
 import About from '../About/About'
 import LoginPage from '../LoginPage/LoginPage'
 import SignupPage from '../SignupPage/SignupPage'
+import ChatsPage from '../ChatsPage/ChatsPage'
 
 import Navbar from '../../components/Navbar/Navbar'
 
@@ -12,12 +13,9 @@ import userService from '../../utils/userService'
 
 class App extends Component {
   state = {
-    user: null,
+    user: userService.getUser(),
   };
 
-  async componentDidMount() {
-    this.handleSignupOrLogin();
-  }
 
   handleSignupOrLogin = () => {
     this.setState({user: userService.getUser()});
@@ -72,6 +70,16 @@ class App extends Component {
             )}
           />
 
+          <Route 
+            exact path='/chats'
+            render={() => (
+              this.state.user
+              ?
+              <ChatsPage />
+              :
+              <Redirect to='/login/' />
+            )}
+          />
         </Switch>
       </div>
     );

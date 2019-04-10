@@ -2,7 +2,7 @@ import React from 'react';
 import chatService from '../../utils/chatService'
 // import {Redirect} from 'react-router-dom'
 
-class CreateChat extends React.Component {
+class ChatsPage extends React.Component {
 
   state = {
     chats: []
@@ -10,7 +10,7 @@ class CreateChat extends React.Component {
 
   handleCreateChat = async () => {
     const chat = await chatService.create();
-    console.log(chat._id)
+    this.props.history.push(`/chats/${chat._id}`)
   }
 
   render() {
@@ -22,4 +22,4 @@ class CreateChat extends React.Component {
   }
 }
 
-export default CreateChat;
+export default ChatsPage;

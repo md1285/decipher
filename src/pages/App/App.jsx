@@ -5,6 +5,7 @@ import About from '../About/About'
 import LoginPage from '../LoginPage/LoginPage'
 import SignupPage from '../SignupPage/SignupPage'
 import ChatsPage from '../ChatsPage/ChatsPage'
+import ChatPage from '../ChatPage/ChatPage'
 
 import Navbar from '../../components/Navbar/Navbar'
 
@@ -72,10 +73,23 @@ class App extends Component {
 
           <Route 
             exact path='/chats'
-            render={() => (
+            render={(props) => (
               this.state.user
               ?
-              <ChatsPage />
+              <ChatsPage 
+                {...props}
+              />
+              :
+              <Redirect to='/login/' />
+            )}
+          />
+          <Route 
+            exact path='/chats/:id'
+            render={(props) => (
+              this.state.user?
+              <ChatPage 
+                {...props}
+              />
               :
               <Redirect to='/login/' />
             )}

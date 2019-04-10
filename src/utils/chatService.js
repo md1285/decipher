@@ -18,6 +18,26 @@ function create() {
   });
 }
 
+function submitMessage(content, id) {
+  // console.log('submitting: ' + content);
+  console.log(JSON.stringify({content}));
+  return fetch(BASE_URL + `submitmessage`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application.json',
+      'Authorization': 'Bearer ' + tokenService.getToken(),
+    },
+    body: JSON.stringify({ 
+      content,
+      id,
+   }),
+  }).then(res => {
+    if (res.ok) return res.json();
+    throw new Error('Unable to send message.')
+  });
+}
+
 export default {
-  create
+  create,
+  submitMessage
 };

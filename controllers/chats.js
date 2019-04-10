@@ -6,7 +6,7 @@ module.exports = {
 };
 
 async function create(req, res) {
-  const chat = new Chat({content: 'Chat content'});
+  const chat = new Chat();
   try {
     await chat.save();
     res.json(chat);

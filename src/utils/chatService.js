@@ -15,8 +15,7 @@ function create() {
   .then(res => {
     if (res.ok) return res.json();
     throw new Error('There was an error creating chat');
-  })
-  .then(data => data);
+  });
 }
 
 export default {

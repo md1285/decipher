@@ -1,5 +1,6 @@
 import React from 'react';
 import chatService from '../../utils/chatService'
+// import {Redirect} from 'react-router-dom'
 
 class CreateChat extends React.Component {
 
@@ -7,8 +8,9 @@ class CreateChat extends React.Component {
     chats: []
   };
 
-  handleCreateChat = () => {
-    chatService.create();
+  handleCreateChat = async () => {
+    const chat = await chatService.create();
+    console.log(chat._id)
   }
 
   render() {

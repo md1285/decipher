@@ -2,7 +2,7 @@ const Chat = require('../models/chat')
 
 module.exports = {
   create,
-  get,
+  getAllMessages,
   submitMessage,
 };
 
@@ -18,11 +18,11 @@ async function create(req, res) {
 }
 
 async function submitMessage(req, res) {
-  console.log(req.body);
   try {
     const chat = await Chat.findById(req.body.id);
     chat.messages.push({
-      user: req.user,
+      user: req.user._id,
+      userName: req.user.userName,
       content: req.body.content,
     });
     await chat.save()
@@ -32,6 +32,11 @@ async function submitMessage(req, res) {
   }
 }
 
-async function get() {
-
+async function getAllMessages(req, res) {
+  try {
+    const chat = await Chat.findById(req.params.id);
+    res.json(chat.messages);
+  } catch (err) {
+    res.status(400).json(err);
+  }
 }

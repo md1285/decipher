@@ -8,6 +8,12 @@ class ChatPage extends React.Component {
     messages: [],
   };
 
+  async componentDidMount() {
+    const messages = await chatService.getAllMessages(this.props.match.params.id);
+    this.setState({messages})
+  }
+
+
   handleChange = e => {
     this.setState({
       [e.target.name]: e.target.value 
@@ -45,6 +51,13 @@ class ChatPage extends React.Component {
             disabled={this.state.content === ''}
           >Submit</button>
         </form>
+        <div>
+          {this.state.messages.map(m => (
+            <div
+              key={m._id}
+            >{m.userName}: {m.content}</div>
+          ))}
+        </div>
       </div>
     );
   }

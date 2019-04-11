@@ -2,7 +2,7 @@ const Chat = require('../models/chat')
 
 module.exports = {
   create,
-  getAllMessages,
+  getChat,
 };
 
 async function create(req, res) {
@@ -16,11 +16,15 @@ async function create(req, res) {
   }
 }
 
-async function getAllMessages(req, res) {
-  try {
+async function getChat(req, res) {
+  // try {
     const chat = await Chat.findById(req.params.id);
-    res.json(chat.messages);
-  } catch (err) {
-    res.status(400).json(err);
-  }
+    if (chat) {
+      res.json(chat);
+    } else {
+      res.json(null)
+    }
+  // } catch (err) {
+  //   res.status(400).json(err);
+  // }
 }

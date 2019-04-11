@@ -1,11 +1,11 @@
 import React from 'react';
 import chatService from '../../utils/chatService'
-// import {Redirect} from 'react-router-dom'
 
 class ChatsPage extends React.Component {
 
   state = {
-    chats: []
+    chats: [],
+    code: '',
   };
 
   handleCreateChat = async () => {
@@ -13,11 +13,37 @@ class ChatsPage extends React.Component {
     this.props.history.push(`/chats/${chat._id}`)
   }
 
+  handleJoinChat = e => {
+    e.preventDefault();
+    this.props.history.push(`/chats/${this.state.code}`)
+  }
+
+  handleChange = e => {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  }
+
   render() {
     return (
+      <>
+
       <button
         onClick={this.handleCreateChat}
       >Create Chat</button>
+      
+      <form onSubmit={this.handleJoinChat}>
+      <input
+        type='text'
+        name='code'
+        placeholder='Enter code'
+        value={this.state.code}
+        onChange={this.handleChange}
+      />
+      <button type='submit'>Join Chat</button>
+      </form>
+
+      </>
     )
   }
 }

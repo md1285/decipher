@@ -35,8 +35,8 @@ function submitMessage(content, id) {
   });
 }
 
-function getAllMessages(id) {
-  return fetch(BASE_URL + `getallmessages/${id}`, {
+function getChat(id) {
+  return fetch(BASE_URL + `getchat/${id}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -51,5 +51,5 @@ function getAllMessages(id) {
 export default {
   create,
   submitMessage,
-  getAllMessages,
+  getChat,
 };

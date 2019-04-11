@@ -3,7 +3,7 @@ const router = express.Router();
 const chatCtrl = require('../../controllers/chats');
 
 router.post('/create', checkAuth, chatCtrl.create);
-router.get('/getallmessages/:id', checkAuth, chatCtrl.getAllMessages);
+router.get('/getchat/:id', checkAuth, chatCtrl.getChat);
 
 /* auth middleware */
 function checkAuth(req, res, next) {

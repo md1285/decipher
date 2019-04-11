@@ -1,18 +1,26 @@
 import React from 'react';
 import chatService from '../../utils/chatService';
 import socket from '../../socket'
+import ChatWindow from '../../components/ChatWindow/ChatWindow'
 
 class ChatPage extends React.Component {
 
   state = {
     content: '',
     messages: [],
+    chat: '',
   };
 
   async componentDidMount() {
     socket.registerApp(this);
-    const messages = await chatService.getAllMessages(this.props.match.params.id);
-    this.setState({messages})
+    await socket.joinChat(this.props.match.params.id)
+    // const chat = await chatService.getChat(this.props.match.params.id);
+    // this.setState({
+    //   chat,
+    // })
+    if (this.state.chat) {
+      this.setState({messages: this.state.chat.messages})
+    }
   }
 
 
@@ -38,28 +46,19 @@ class ChatPage extends React.Component {
   render() {
     return (
       <div>
-        <h1>Chat Page {this.props.match.params.id}</h1>
-        <form
-          onSubmit={this.handleSubmit}
-        >
-          <input 
-            type='text'
-            name='content'
-            value={this.state.content}
-            onChange={this.handleChange}
-          />
-          <button
-            type='submit'
-            disabled={this.state.content === ''}
-          >Submit</button>
-        </form>
-        <div>
-          {this.state.messages.map(m => (
-            <div
-              key={m._id}
-            >{m.userName}: {m.content}</div>
-          ))}
-        </div>
+        {this.state.chat !== null
+        ?
+        <ChatWindow 
+          {...this.props}
+          content={this.state.content}
+          messages={this.state.messages}
+          chat={this.state.chat}
+          handleChange={this.handleChange}
+          handleSubmit={this.handleSubmit}
+        />
+        :
+        <div>Invalid code</div>
+        }
       </div>
     );
   }

@@ -27,27 +27,25 @@ function init(http) {
     })
 
     socket.on('join-chat', async function({code, token}){
-      const chat = await Chat.findById(code);
-
-
-      const user = await validateToken(token);
-
-      if (!user) return;
-      if (!chat) {
-        socket.join('inactive-code', function(){
-          io.to('inactive-code').emit('inactive-code')
-        });
-      } else {
-        // if (!chat.users.includes(user._id)) {
-        //   chat.users.push(user._id)
-        //   await chat.save()
-        // }
+      try {
+        const chat = await Chat.findById(code).populate('users');
+        const user = await validateToken(token);
+        if (!user) return;
+        if (!chat.users.map(u => u.id).includes(user._id)) {
+          chat.users.push(user._id)
+          await chat.save()
+        }
         socket.join(chat._id, function() {
           io.to(chat._id).emit('new-message', chat)
+        });
+      } catch {
+        socket.join('inactive-code', function(){
+          io.to('inactive-code').emit('inactive-code')
         });
       }
     });
 
+    
   });
 }
 

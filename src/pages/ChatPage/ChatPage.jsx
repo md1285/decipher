@@ -1,5 +1,5 @@
 import React from 'react';
-import chatService from '../../utils/chatService';
+// import chatService from '../../utils/chatService';
 import socket from '../../socket'
 import ChatWindow from '../../components/ChatWindow/ChatWindow'
 
@@ -46,8 +46,10 @@ class ChatPage extends React.Component {
   render() {
     return (
       <div>
-        {this.state.chat !== null
+        {this.state.chat === null
         ?
+        <div>Invalid code</div>
+        :
         <ChatWindow 
           {...this.props}
           content={this.state.content}
@@ -56,8 +58,6 @@ class ChatPage extends React.Component {
           handleChange={this.handleChange}
           handleSubmit={this.handleSubmit}
         />
-        :
-        <div>Invalid code</div>
         }
       </div>
     );

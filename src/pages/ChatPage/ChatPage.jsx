@@ -27,8 +27,9 @@ class ChatPage extends React.Component {
     try {
       const content = this.state.content;
       const id = this.props.match.params.id;
-      const chat = await chatService.submitMessage(content, id);
-      this.setState({messages: chat.messages})
+      await chatService.submitMessage(content, id);
+      // this.setState({messages: chat.messages})
+      socket.sendMessage('new-message', id);
     } catch (err) {
       alert(`There was an error: ${err}`)
     }

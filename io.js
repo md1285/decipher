@@ -12,8 +12,9 @@ function init(http) {
 
 
     // all listeners here
-    socket.on('new-message', function() {
-      io.emit('new-message');
+    socket.on('new-message', function(id) {
+      console.log('server message received');
+      io.emit('new-message', id);
     })
 
 

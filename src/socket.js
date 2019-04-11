@@ -1,3 +1,4 @@
+import chatService from './utils/chatService'
 const socket = window.io();
 let ChatPage = null;
 
@@ -8,14 +9,17 @@ function registerApp(chat) {
 
 
 // Listen for messages from server
-socket.on('new-message', function(){
+socket.on('new-message', async function(id){
+  console.log('client message received', id);
+  let messages = await chatService.getAllMessages(id);
+  console.log(messages)
+  ChatPage.setState({messages})
 
-  ChatPage.setState()
 })
 
 // Send messages to server
-function sendMessage(id) {
-  socket.emit('new-message', id)
+function sendMessage(message, id) {
+  socket.emit(message, id)
 }
 
 // exports

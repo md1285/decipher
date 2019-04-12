@@ -39,7 +39,6 @@ class ChatWindow extends React.Component{
           return char;
         }
       }).join('');
-      console.log(newScrambledMessage);
       const newScrambledMessages = this.state.scrambledMessages;
       newScrambledMessages.push(newScrambledMessage);
       this.setState({

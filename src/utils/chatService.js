@@ -48,8 +48,38 @@ function getChat(id) {
   });
 }
 
+function scrambleAllMessages(props, key, randChars) {
+  return props.messages.map(m => {
+    return m.content
+    .split('')
+    .map((char, idx) => {
+      if (idx % key === 0 && key < 10) {
+        return randChars[Math.floor(Math.random() * randChars.length)];
+      } else {
+        return char;
+      }
+    })
+    .join('');
+  })
+}
+
+function scrambleLastMessage(props, key, randChars) {
+  return props.messages[props.messages.length - 1].content
+  .split('')
+  .map((char, idx) => {
+    if (idx % key === 0) {
+      return randChars[Math.floor(Math.random() * randChars.length)];
+    } else {
+      return char;
+    }
+  })
+  .join('');
+}
+
 export default {
   create,
   submitMessage,
   getChat,
+  scrambleAllMessages,
+  scrambleLastMessage,
 };

@@ -17,6 +17,10 @@ socket.on('inactive-code', function() {
   ChatPage.setState({chat: null});
 });
 
+socket.on('unauthorized-user', function() {
+  ChatPage.setState({serverMessage: 'You are not authorized to post in this room.'});
+})
+
 // Send messages to server
 function sendMessage({content, id}) {
   const token = tokenService.getToken();

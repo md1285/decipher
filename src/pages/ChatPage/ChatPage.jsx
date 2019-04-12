@@ -9,15 +9,12 @@ class ChatPage extends React.Component {
     content: '',
     messages: [],
     chat: '',
+    serverMessage: '',
   };
 
   async componentDidMount() {
     socket.registerApp(this);
     await socket.joinChat(this.props.match.params.id)
-    // const chat = await chatService.getChat(this.props.match.params.id);
-    // this.setState({
-    //   chat,
-    // })
     if (this.state.chat) {
       this.setState({messages: this.state.chat.messages})
     }
@@ -46,18 +43,25 @@ class ChatPage extends React.Component {
   render() {
     return (
       <div>
+
         {this.state.chat === null
         ?
         <div>Invalid code</div>
         :
-        <ChatWindow 
-          {...this.props}
-          content={this.state.content}
-          messages={this.state.messages}
-          chat={this.state.chat}
-          handleChange={this.handleChange}
-          handleSubmit={this.handleSubmit}
-        />
+
+          this.state.serverMessage
+          ?
+          <div>{this.state.serverMessage}</div>
+          :
+          <ChatWindow 
+            {...this.props}
+            content={this.state.content}
+            messages={this.state.messages}
+            chat={this.state.chat}
+            handleChange={this.handleChange}
+            handleSubmit={this.handleSubmit}
+          />
+
         }
       </div>
     );

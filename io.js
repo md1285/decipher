@@ -12,18 +12,28 @@ function init(http) {
 
     // all listeners here
     socket.on('new-message', async function({content, id, token}) {
-      const chat = await Chat.findById(id);
+      const chat = await Chat.findById(id).populate('users');
       const user = await validateToken(token);
       if (!user) return;
-      chat.messages.push({
-        content: content,
-        user: user._id,
-        userName: user.userName,
-      });
-      await chat.save();
-      socket.join(chat._id, function() {
-        io.to(chat._id).emit('new-message', chat);
-      });
+      // if user is authorized on chat
+      const authorized = chat.users.map(u => u.id).includes(user._id);
+      if (authorized) {
+        chat.messages.push({
+          content: content,
+          user: user._id,
+          userName: user.userName,
+        });
+        await chat.save();
+        socket.join(chat._id, function() {
+          io.to(chat._id).emit('new-message', chat);
+        });
+
+      } else {
+        const code = Math.random().toString(16).substr(2,)
+        socket.join(`unauthorized-user-${code}`, function() {
+          io.to(`unauthorized-user-${code}`).emit('unauthorized-user');
+        });
+      }
     })
 
     socket.on('join-chat', async function({code, token}){
@@ -45,7 +55,7 @@ function init(http) {
       }
     });
 
-    
+
   });
 }
 

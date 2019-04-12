@@ -1,6 +1,30 @@
 import React from 'react'
 
+const randChars = '!@#$%^&*()<>?/_'
+
 class ChatWindow extends React.Component{
+
+  state = {
+    scrambleKey: 3,
+    scrambledMessages: [],
+  };
+
+  componentWillReceiveProps(props) {
+    if (props.messages[0]) {
+      let key = this.state.scrambleKey;
+      const scrambledMessages = props.messages.map(m => m.content.split('').map((char, idx) => {
+        if (idx % key === 0 && key < 10) {
+          return randChars[Math.floor(Math.random()*randChars.length)];
+        } else{
+          return char
+        }
+      }).join(''));
+
+      this.setState({
+        scrambledMessages
+      })
+    }
+  }
 
   render() {
     return (
@@ -22,10 +46,17 @@ class ChatWindow extends React.Component{
         >Submit</button>
       </form>
       <div>
-        {this.props.messages.map(m => (
+        {this.props.messages.map((m, i) => (
           <div
             key={m._id}
-          >{m.userName}: {m.content}</div>
+            style={
+              this.props.user._id === m.user
+              ?
+              {backgroundColor: 'red'}
+              :
+              {backgroundColor: 'green'}
+            }
+          >{m.userName}: {this.props.user._id === m.user ? m.content : this.state.scrambledMessages[i]}</div>
         ))}
       </div>
       </div>

@@ -1,5 +1,5 @@
 import React from 'react';
-// import chatService from '../../utils/chatService';
+import userService from '../../utils/userService'
 import socket from '../../socket'
 import ChatWindow from '../../components/ChatWindow/ChatWindow'
 
@@ -10,10 +10,12 @@ class ChatPage extends React.Component {
     messages: [],
     chat: '',
     serverMessage: '',
+    user: '',
   };
 
   async componentDidMount() {
     socket.registerApp(this);
+    this.setState({user: userService.getUser()})
     await socket.joinChat(this.props.match.params.id)
     if (this.state.chat) {
       this.setState({messages: this.state.chat.messages})
@@ -58,6 +60,7 @@ class ChatPage extends React.Component {
             content={this.state.content}
             messages={this.state.messages}
             chat={this.state.chat}
+            user={this.state.user}
             handleChange={this.handleChange}
             handleSubmit={this.handleSubmit}
           />

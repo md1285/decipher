@@ -11,9 +11,10 @@ class ChatWindow extends React.Component{
   };
 
   componentWillReceiveProps(props) {
-    if (props.messages[0] && props.messages !== this.state.messages) {
-      let key = this.state.scrambleKey;
 
+
+    if (props.messages[0] && props.messages !== this.state.messages && !this.state.scrambledMessages[0]) {
+      let key = this.state.scrambleKey;
       const newScrambledMessages = props.messages.map(m => {
         return m.content.split('').map((char, idx) => {
           if (idx % key === 0 && key < 10) {
@@ -28,6 +29,26 @@ class ChatWindow extends React.Component{
         messages: props.messages
       })
     } 
+    
+    else if (this.state.scrambledMessages[0]) {
+      let key = this.state.scrambleKey;
+      const newScrambledMessage = props.messages[props.messages.length - 1].content.split('').map((char, idx) => {
+        if (idx % key === 0) {
+          return randChars[Math.floor(Math.random()*randChars.length)];
+        } else {
+          return char;
+        }
+      }).join('');
+      console.log(newScrambledMessage);
+      const newScrambledMessages = this.state.scrambledMessages;
+      newScrambledMessages.push(newScrambledMessage);
+      this.setState({
+        scrambledMessages: newScrambledMessages,
+        messages: props.messages
+      })
+    }
+
+    
   }
 
   render() {

@@ -49,8 +49,9 @@ function init(http) {
           io.to(chat._id).emit('new-message', chat)
         });
       } catch {
-        socket.join('inactive-code', function(){
-          io.to('inactive-code').emit('inactive-code')
+        const roomCode = Math.random().toString(16).substr(2,)
+        socket.join(`inactive-code-${roomCode}`, function(){
+          io.to(`inactive-code-${roomCode}`).emit('inactive-code')
         });
       }
     });

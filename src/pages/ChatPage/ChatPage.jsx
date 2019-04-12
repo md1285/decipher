@@ -2,13 +2,14 @@ import React from 'react';
 import userService from '../../utils/userService'
 import socket from '../../socket'
 import ChatWindow from '../../components/ChatWindow/ChatWindow'
+import Descrambler from '../../components/Descrambler/Descrambler'
 
 class ChatPage extends React.Component {
 
   state = {
     content: '',
     messages: [],
-    chat: '',
+    chat: null,
     serverMessage: '',
     user: '',
   };
@@ -37,7 +38,7 @@ class ChatPage extends React.Component {
         id: this.props.match.params.id,
       });
     } catch (err) {
-      alert(`There was an error: ${err}`)
+      this.setState({serverMessage: err})
     }
     this.setState({content: ''})
   };
@@ -45,16 +46,13 @@ class ChatPage extends React.Component {
   render() {
     return (
       <div>
-
-        {this.state.chat === null
-        ?
-        <div>Invalid code</div>
-        :
-
-          this.state.serverMessage
+        {this.state.chat === false && <div>Inactive Code</div>}
+        {this.state.chat === true && 
+          (this.state.serverMessage
           ?
           <div>{this.state.serverMessage}</div>
           :
+          <>
           <ChatWindow 
             {...this.props}
             content={this.state.content}
@@ -64,7 +62,8 @@ class ChatPage extends React.Component {
             handleChange={this.handleChange}
             handleSubmit={this.handleSubmit}
           />
-
+          <Descrambler />
+          </>)
         }
       </div>
     );

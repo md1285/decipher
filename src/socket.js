@@ -10,11 +10,14 @@ function registerApp(chat) {
 
 // Listen for messages from server
 socket.on('new-message', function(chat){
-  ChatPage.setState({messages: chat.messages})
+  ChatPage.setState({
+    messages: chat.messages,
+    chat: true,
+  })
 })
 
 socket.on('inactive-code', function() {
-  ChatPage.setState({chat: null});
+  ChatPage.setState({chat: false});
 });
 
 socket.on('unauthorized-user', function() {

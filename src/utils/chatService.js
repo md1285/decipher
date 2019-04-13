@@ -48,22 +48,7 @@ function getChat(id) {
   });
 }
 
-function scrambleAllMessages(props, key, randChars) {
-  return props.messages.map(m => {
-    return m.content
-    .split('')
-    .map((char, idx) => {
-      if (idx % key === 0 && key < 10) {
-        return randChars[Math.floor(Math.random() * randChars.length)];
-      } else {
-        return char;
-      }
-    })
-    .join('');
-  })
-}
-
-function scrambleNewMessages(props, scrambledMessages, key, randChars) {
+function scrambleAllOrNewMessages(props, scrambledMessages, key, randChars) {
   props.messages.forEach((message, idx) => {
     if (!scrambledMessages[idx]) {
       let newScrambledMessage = message.content
@@ -86,6 +71,5 @@ export default {
   create,
   submitMessage,
   getChat,
-  scrambleAllMessages,
-  scrambleNewMessages,
+  scrambleAllOrNewMessages,
 };

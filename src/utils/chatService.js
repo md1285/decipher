@@ -63,17 +63,23 @@ function scrambleAllMessages(props, key, randChars) {
   })
 }
 
-function scrambleLastMessage(props, key, randChars) {
-  return props.messages[props.messages.length - 1].content
-  .split('')
-  .map((char, idx) => {
-    if (idx % key === 0) {
-      return randChars[Math.floor(Math.random() * randChars.length)];
-    } else {
-      return char;
+function scrambleNewMessages(props, scrambledMessages, key, randChars) {
+  props.messages.forEach((message, idx) => {
+    if (!scrambledMessages[idx]) {
+      let newScrambledMessage = message.content
+      .split('')
+      .map((char, charIdx) => {
+        if (charIdx % key === 0) {
+          return randChars[Math.floor(Math.random() * randChars.length)];
+        } else {
+          return char;
+        }
+      })
+      .join('');
+      scrambledMessages.push(newScrambledMessage);
     }
-  })
-  .join('');
+  });
+  return scrambledMessages;
 }
 
 export default {
@@ -81,5 +87,5 @@ export default {
   submitMessage,
   getChat,
   scrambleAllMessages,
-  scrambleLastMessage,
+  scrambleNewMessages,
 };

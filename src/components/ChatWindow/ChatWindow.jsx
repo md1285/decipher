@@ -26,9 +26,7 @@ class ChatWindow extends React.Component {
         scrambledMessages: newScrambledMessages,
       })
     } else if (props.messages[0] && props.messages.length !== this.state.scrambledMessages.length) {
-      const newScrambledMessage = chatService.scrambleLastMessage(props, this.state.scrambleKey, randChars)
-      const newScrambledMessages = this.state.scrambledMessages;
-      newScrambledMessages.push(newScrambledMessage);
+      const newScrambledMessages = chatService.scrambleNewMessages(props, this.state.scrambledMessages, this.state.scrambleKey, randChars);
       this.setState({
         scrambledMessages: newScrambledMessages,
       })

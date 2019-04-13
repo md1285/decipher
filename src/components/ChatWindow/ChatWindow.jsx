@@ -19,8 +19,7 @@ class ChatWindow extends React.Component {
   }
 
   /* helper functions */
-  scrambleMessages = (props) => {
-
+  scrambleMessages(props) {
     if (props.messages[0] && !this.state.scrambledMessages[0]) {
       const newScrambledMessages = chatService.scrambleAllMessages(props, this.state.scrambleKey, randChars);
       this.setState({
@@ -34,7 +33,6 @@ class ChatWindow extends React.Component {
         scrambledMessages: newScrambledMessages,
       })
     }
-    
   }
 
 

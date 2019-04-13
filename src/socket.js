@@ -13,7 +13,8 @@ socket.on('new-message', function(chat){
   ChatPage.setState({
     messages: chat.messages,
     chat: true,
-  })
+  });
+  ChatPage.scrambleMessages();
 })
 
 socket.on('inactive-code', function() {

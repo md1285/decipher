@@ -48,8 +48,8 @@ function getChat(id) {
   });
 }
 
-function scrambleAllOrNewMessages(props, scrambledMessages, key, randChars) {
-  props.messages.forEach((message, idx) => {
+function scrambleAllOrNewMessages(messages, scrambledMessages, key, randChars) {
+  messages.forEach((message, idx) => {
     if (!scrambledMessages[idx]) {
       let newScrambledMessage = message.content
       .split('')

@@ -1,30 +1,21 @@
 import React from 'react'
-import chatService from '../../utils/chatService';
-
-const randChars = '!@#$%^&*()<>?/_'
 
 class ChatWindow extends React.Component {
 
-  state = {
-    scrambleKey: 3,
-    scrambledMessages: [],
-  };
+  // state = {
+  //   scrambleKey: 3,
+  //   scrambledMessages: [],
+  // };
 
-  componentDidMount() {
-    this.scrambleMessages(this.props);
-  }
+  // componentDidMount() {
+  //   this.scrambleMessages(this.props);
+  // }
 
-  componentWillReceiveProps(props) {
-    this.scrambleMessages(props);
-  }
+  // componentWillReceiveProps(props) {
+  //   this.scrambleMessages(props);
+  // }
 
-  /* helper functions */
-  scrambleMessages(props) {
-    const newScrambledMessages = chatService.scrambleAllOrNewMessages(props, this.state.scrambledMessages, this.state.scrambleKey, randChars);
-    this.setState({
-      scrambledMessages: newScrambledMessages,
-    })
-  }
+
 
 
 
@@ -58,7 +49,7 @@ class ChatWindow extends React.Component {
                   :
                   { backgroundColor: 'green' }
               }
-            >{m.userName}: {this.props.user._id === m.user ? m.content : this.state.scrambledMessages[i]}</div>
+            >{m.userName}: {this.props.user._id === m.user ? m.content : this.props.scrambledMessages[i]}</div>
           ))}
         </div>
       </div>

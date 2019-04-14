@@ -130,12 +130,14 @@ class ChatPage extends React.Component {
                   handleChange={this.handleChange}
                   handleSubmit={this.handleSubmit}
                 />
+                <div className={styles.footer}>
                 <Descrambler
                   descramblerSettingLeft={this.state.descramblerSettingLeft}
                   descramblerSettingRight={this.state.descramblerSettingRight}
 
                   handleChange={this.handleChange}
                 />
+                </div>
               </>)
           }
         </div>

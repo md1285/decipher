@@ -19,6 +19,8 @@ socket.on('new-message', async function(chat){
     await ChatPage.setState({descrambledForUser: true})
   }
   ChatPage.scrambleMessages();
+  const chatWindow = document.getElementById('chat-window-messages-container');
+  chatWindow.scrollTop = chatWindow.scrollHeight;
 })
 
 socket.on('inactive-code', function() {

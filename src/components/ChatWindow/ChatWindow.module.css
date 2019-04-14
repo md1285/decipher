@@ -1,0 +1,27 @@
+.ChatWindow {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.h1 {
+  font-size: 1.5em;
+  /* font-size: 2vw; */
+  padding: 1.25vh 0;
+  height: 8vh;
+  border: 2px solid white;
+}
+
+.messagesContainer {
+  overflow-y: auto;
+  border: 2px solid green;
+  max-height: 50vh;
+  width: 50vw;
+}
+
+.form {
+  height: 8vh;
+  padding: 2vh 0;
+  border: 2px solid white;
+}

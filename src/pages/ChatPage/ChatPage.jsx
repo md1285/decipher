@@ -22,7 +22,6 @@ class ChatPage extends React.Component {
     descramblerSettingRight: 4,
     challengeRating: 0,
     scrambledMessages: [],
-    descrambledFor: [],
     descrambledForUser: false,
   };
 

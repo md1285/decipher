@@ -25,7 +25,7 @@ function init(http) {
         });
         await chat.save();
         socket.join(chat._id, function() {
-          io.to(chat._id).emit('new-message', {chat});
+          io.to(chat._id).emit('new-message', chat);
         });
 
       } else {
@@ -46,7 +46,7 @@ function init(http) {
           await chat.save()
         }
         socket.join(chat._id, function() {
-          io.to(chat._id).emit('new-message', {chat})
+          io.to(chat._id).emit('new-message', chat)
         });
       } catch (err){
         const roomCode = Math.random().toString(16).substr(2,)

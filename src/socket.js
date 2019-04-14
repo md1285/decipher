@@ -9,18 +9,15 @@ function registerApp(chat) {
 
 
 // Listen for messages from server
-socket.on('new-message', async function(result){
+socket.on('new-message', async function(chat){
   await ChatPage.setState({
-    messages: result.chat.messages,
+    messages: chat.messages,
     chat: true,
-    descrambledFor: result.chat.descrambledFor
   });
   const user = tokenService.getUserFromToken();
-  // if (result.chat.descrambledFor) {
-    if (result.chat.descrambledFor.map(u => u._id).includes(user._id)) {
-      await ChatPage.setState({descrambledForUser: true})
-    }
-  // }
+  if (chat.descrambledFor.map(u => u._id).includes(user._id)) {
+    await ChatPage.setState({descrambledForUser: true})
+  }
   ChatPage.scrambleMessages();
 })
 

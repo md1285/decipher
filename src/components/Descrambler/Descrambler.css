@@ -107,3 +107,8 @@
   display: flex;
   justify-content: space-around;
 }
+
+.dsc-btn-sel {
+  background-color: green;
+  color: white;
+}

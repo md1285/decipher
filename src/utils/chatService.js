@@ -114,6 +114,20 @@ function addUserToDescrambledFor(chatId) {
   });
 }
 
+function getAllChats() {
+  return fetch(BASE_URL + 'getallchats', {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + tokenService.getToken(),
+    },
+  })
+  .then(res => {
+    if (res.ok) return res.json();
+    throw new Error('Unable to retrieve chats');
+  });
+}
+
 export default {
   create,
   getChat,
@@ -122,4 +136,5 @@ export default {
   reScrambleAllMessages,
   generateDescrambleKey,
   addUserToDescrambledFor,
+  getAllChats,
 };

@@ -1,5 +1,5 @@
 .descrambler-container {
-  height: 200px;
+  height: 180px;
   width: 200px;
   display: grid;
   grid-template-columns: repeat(10, 1fr);

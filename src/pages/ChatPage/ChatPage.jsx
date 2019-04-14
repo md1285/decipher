@@ -4,6 +4,7 @@ import socket from '../../socket'
 import ChatWindow from '../../components/ChatWindow/ChatWindow'
 import Descrambler from '../../components/Descrambler/Descrambler'
 import chatService from '../../utils/chatService';
+import styles from './ChatPage.module.css'
 
 const randChars = '!@#$%^&*()<>?/_'
 
@@ -30,7 +31,7 @@ class ChatPage extends React.Component {
     socket.registerApp(this);
     let descrambleKeyLeft = this.generateDescrambleKey(this.state.descramblerSettingLeft);
     let descrambleKeyRight = this.generateDescrambleKey(this.state.descramblerSettingRight);
-    this.setState({
+    await this.setState({
       user: userService.getUser(),
       descrambleKeyLeft,
       descrambleKeyRight,
@@ -43,7 +44,7 @@ class ChatPage extends React.Component {
       this.scrambleMessages();
     }
   }
-  
+
   /* helper functions */
 
 
@@ -107,35 +108,37 @@ class ChatPage extends React.Component {
 
   render() {
     return (
-      <div>
-        {this.state.chat === false && <div>Inactive Code</div>}
-        {this.state.chat === true &&
-          (this.state.serverMessage
-            ?
-            <div>{this.state.serverMessage}</div>
-            :
-            <>
-              <ChatWindow
-                {...this.props}
+      <div className={styles.chatContainer}>
+        <div className={styles.chatWrapper}>
+          {this.state.chat === false && <div>Inactive Code</div>}
+          {this.state.chat === true &&
+            (this.state.serverMessage
+              ?
+              <div>{this.state.serverMessage}</div>
+              :
+              <>
+                <ChatWindow
+                  {...this.props}
 
-                content={this.state.content}
-                messages={this.state.messages}
-                chat={this.state.chat}
-                user={this.state.user}
-                scrambledMessages={this.state.scrambledMessages}
-                descrambledForUser={this.state.descrambledForUser}
+                  content={this.state.content}
+                  messages={this.state.messages}
+                  chat={this.state.chat}
+                  user={this.state.user}
+                  scrambledMessages={this.state.scrambledMessages}
+                  descrambledForUser={this.state.descrambledForUser}
 
-                handleChange={this.handleChange}
-                handleSubmit={this.handleSubmit}
-              />
-              <Descrambler
-                descramblerSettingLeft={this.state.descramblerSettingLeft}
-                descramblerSettingRight={this.state.descramblerSettingRight}
+                  handleChange={this.handleChange}
+                  handleSubmit={this.handleSubmit}
+                />
+                <Descrambler
+                  descramblerSettingLeft={this.state.descramblerSettingLeft}
+                  descramblerSettingRight={this.state.descramblerSettingRight}
 
-                handleChange={this.handleChange}
-              />
-            </>)
-        }
+                  handleChange={this.handleChange}
+                />
+              </>)
+          }
+        </div>
       </div>
     );
   }

@@ -1,5 +1,6 @@
 import React from 'react';
 import chatService from '../../utils/chatService'
+import { Link } from 'react-router-dom'
 
 class ChatsPage extends React.Component {
 
@@ -7,6 +8,13 @@ class ChatsPage extends React.Component {
     chats: [],
     code: '',
   };
+
+  async componentDidMount() {
+    const chats = await chatService.getAllChats();
+    this.setState({
+      chats
+    })
+  }
 
   handleCreateChat = async () => {
     const chat = await chatService.create();
@@ -26,24 +34,36 @@ class ChatsPage extends React.Component {
 
   render() {
     return (
-      <>
-
-      <button
-        onClick={this.handleCreateChat}
-      >Create Chat</button>
-      
-      <form onSubmit={this.handleJoinChat}>
-      <input
-        type='text'
-        name='code'
-        placeholder='Enter code'
-        value={this.state.code}
-        onChange={this.handleChange}
-      />
-      <button type='submit'>Join Chat</button>
-      </form>
-
-      </>
+      <div>
+        <button
+          onClick={this.handleCreateChat}
+        >Create Chat</button>
+        <form onSubmit={this.handleJoinChat}>
+          <input
+            type='text'
+            name='code'
+            placeholder='Enter code'
+            value={this.state.code}
+            onChange={this.handleChange}
+          />
+          <button type='submit'>Join Chat</button>
+        </form>
+        <div>
+          {this.state.chats.map(chat => (
+            <Link
+              to={`/chats/${chat._id}`}
+            >
+              <p>Users: 
+              {chat.users.map((u, i) =>
+                (<span> {u.userName}{chat.users[i + 1] &&
+                  <span>,</span>}</span>)
+                )}
+              </p>
+              <p>{new Date(chat.updatedAt).toLocaleDateString() + ' - ' + new Date(chat.updatedAt).toLocaleTimeString()}</p>
+            </Link>
+          ))}
+        </div>
+      </div>
     )
   }
 }

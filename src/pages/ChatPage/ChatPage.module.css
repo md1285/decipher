@@ -1,0 +1,14 @@
+.chatContainer {
+  border: 1px solid red;
+  height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.chatWrapper {
+  border: 1px solid blue;
+  height: 75%;
+  width: 75%;
+  margin-top: -10vh;
+}

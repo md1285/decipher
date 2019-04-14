@@ -45,14 +45,8 @@ function init(http) {
           chat.users.push(user._id)
           await chat.save()
         }
-        let descrambledForUser;
-        if (chat.descrambledFor.map(u => u.id).includes(user._id)) {
-          descrambledForUser = true;
-        } else {
-          descrambledForUser = false;
-        }
         socket.join(chat._id, function() {
-          io.to(chat._id).emit('new-message', {chat, descrambledForUser})
+          io.to(chat._id).emit('new-message', {chat})
         });
       } catch (err){
         const roomCode = Math.random().toString(16).substr(2,)

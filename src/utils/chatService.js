@@ -18,22 +18,6 @@ function create() {
   });
 }
 
-function submitMessage(content, id) {
-  return fetch(BASE_URL + 'submitmessage', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + tokenService.getToken(),
-    },
-    body: JSON.stringify({ 
-      content,
-      id,
-   })
-  }).then(res => {
-    if (res.ok) return res.json();
-    throw new Error('Unable to send message.')
-  });
-}
 
 function getChat(id) {
   return fetch(BASE_URL + `getchat/${id}`, {
@@ -132,7 +116,6 @@ function addUserToDescrambledFor(chatId) {
 
 export default {
   create,
-  submitMessage,
   getChat,
   scrambleAllOrNewMessages,
   getScrambleKey,

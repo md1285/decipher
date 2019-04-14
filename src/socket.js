@@ -13,10 +13,14 @@ socket.on('new-message', async function(result){
   await ChatPage.setState({
     messages: result.chat.messages,
     chat: true,
+    descrambledFor: result.chat.descrambledFor
   });
-  if (result.descrambledForUser) {
-    await ChatPage.setState({descrambledForUser: result.descrambledForUser})
-  }
+  const user = tokenService.getUserFromToken();
+  // if (result.chat.descrambledFor) {
+    if (result.chat.descrambledFor.map(u => u._id).includes(user._id)) {
+      await ChatPage.setState({descrambledForUser: true})
+    }
+  // }
   ChatPage.scrambleMessages();
 })
 

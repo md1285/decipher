@@ -22,6 +22,7 @@ class ChatPage extends React.Component {
     descramblerSettingRight: 4,
     challengeRating: 0,
     scrambledMessages: [],
+    descrambledFor: [],
     descrambledForUser: false,
   };
 
@@ -45,6 +46,8 @@ class ChatPage extends React.Component {
   }
   
   /* helper functions */
+
+
   scrambleMessages() {
     let scrambleKey = this.getScrambleKey();
     const newScrambledMessages = chatService.scrambleAllOrNewMessages(this.state.messages, this.state.scrambledMessages, scrambleKey, randChars);

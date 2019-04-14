@@ -25,7 +25,7 @@ function init(http) {
         });
         await chat.save();
         socket.join(chat._id, function() {
-          io.to(chat._id).emit('new-message', chat);
+          io.to(chat._id).emit('new-message', {chat});
         });
 
       } else {
@@ -38,17 +38,23 @@ function init(http) {
 
     socket.on('join-chat', async function({code, token}){
       try {
-        const chat = await Chat.findById(code).populate('users');
+        const chat = await Chat.findById(code).populate('users descrambledFor');
         const user = await validateToken(token);
         if (!user) return;
         if (!chat.users.map(u => u.id).includes(user._id)) {
           chat.users.push(user._id)
           await chat.save()
         }
+        let descrambledForUser;
+        if (chat.descrambledFor.map(u => u.id).includes(user._id)) {
+          descrambledForUser = true;
+        } else {
+          descrambledForUser = false;
+        }
         socket.join(chat._id, function() {
-          io.to(chat._id).emit('new-message', chat)
+          io.to(chat._id).emit('new-message', {chat, descrambledForUser})
         });
-      } catch {
+      } catch (err){
         const roomCode = Math.random().toString(16).substr(2,)
         socket.join(`inactive-code-${roomCode}`, function(){
           io.to(`inactive-code-${roomCode}`).emit('inactive-code')

@@ -32,7 +32,7 @@ class ChatWindow extends React.Component {
                   :
                   { backgroundColor: 'green' }
               }
-            >{m.userName}: {this.props.user._id === m.user ? m.content : this.props.scrambledMessages[i]}</div>
+            >{m.userName}: {this.props.user._id === m.user  || this.props.descrambledForUser ? m.content : this.props.scrambledMessages[i]}</div>
           ))}
         </div>
       </div>

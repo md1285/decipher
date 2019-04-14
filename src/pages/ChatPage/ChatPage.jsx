@@ -22,6 +22,7 @@ class ChatPage extends React.Component {
     descramblerSettingRight: 4,
     challengeRating: 0,
     scrambledMessages: [],
+    descrambledForUser: false,
   };
 
   /* lifecycle methods */
@@ -61,9 +62,14 @@ class ChatPage extends React.Component {
       this.state.descramblerSettingRight, this.state.descrambleKeyLeft, this.state.descrambleKeyRight);
   }
 
-  reScrambleAllMessages() {
+  async reScrambleAllMessages() {
     const key = this.getScrambleKey();
-    console.log(key)
+    if (key === 10) {
+      await this.setState({
+        descrambledForUser: true,
+      });
+      chatService.addUserToDescrambledFor(this.props.match.params.id);
+    }
     const scrambledMessages = chatService.reScrambleAllMessages(this.state.messages, key, randChars);
     this.setState({ scrambledMessages });
   }
@@ -76,7 +82,7 @@ class ChatPage extends React.Component {
       await this.setState({
         [e.target.name]: value
       });
-      this.reScrambleAllMessages();
+      if (!this.state.descrambledForUser) this.reScrambleAllMessages();
     } else {
       this.setState({
         [e.target.name]: e.target.value
@@ -115,6 +121,7 @@ class ChatPage extends React.Component {
                 chat={this.state.chat}
                 user={this.state.user}
                 scrambledMessages={this.state.scrambledMessages}
+                descrambledForUser={this.state.descrambledForUser}
 
                 handleChange={this.handleChange}
                 handleSubmit={this.handleSubmit}

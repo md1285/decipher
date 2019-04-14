@@ -9,11 +9,14 @@ function registerApp(chat) {
 
 
 // Listen for messages from server
-socket.on('new-message', async function(chat){
+socket.on('new-message', async function(result){
   await ChatPage.setState({
-    messages: chat.messages,
+    messages: result.chat.messages,
     chat: true,
   });
+  if (result.descrambledForUser) {
+    await ChatPage.setState({descrambledForUser: result.descrambledForUser})
+  }
   ChatPage.scrambleMessages();
 })
 

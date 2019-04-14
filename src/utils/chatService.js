@@ -10,7 +10,7 @@ function create() {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + tokenService.getToken(),
     },
-    body: JSON.stringify({content: 'none'}),
+    // body: JSON.stringify({content: 'none'}),
   })
   .then(res => {
     if (res.ok) return res.json();
@@ -115,6 +115,21 @@ function generateDescrambleKey(descrambleSetting) {
   return descrambleKey;
 }
 
+function addUserToDescrambledFor(chatId) {
+  return fetch(BASE_URL + 'addtodescrambled', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + tokenService.getToken(),
+    },
+    body: JSON.stringify({chatId}),
+  })
+  .then(res => {
+    if (res.ok) return;
+    throw new Error('There was an error adding the user');
+  });
+}
+
 export default {
   create,
   submitMessage,
@@ -123,4 +138,5 @@ export default {
   getScrambleKey,
   reScrambleAllMessages,
   generateDescrambleKey,
+  addUserToDescrambledFor,
 };

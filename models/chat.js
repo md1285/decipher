@@ -17,6 +17,10 @@ const chatSchema = new Schema({
   users: [{
     type: Schema.Types.ObjectId,
     ref: 'User'
+  }],
+  descrambledFor: [{
+    type: Schema.Types.ObjectId,
+    ref: 'User',
   }]
 }, {
   timestamps: true

@@ -120,6 +120,9 @@ class ChatPage extends React.Component {
                 handleSubmit={this.handleSubmit}
               />
               <Descrambler
+                descramblerSettingLeft={this.state.descramblerSettingLeft}
+                descramblerSettingRight={this.state.descramblerSettingRight}
+
                 handleChange={this.handleChange}
               />
             </>)

@@ -27,10 +27,12 @@ class ChatPage extends React.Component {
   /* lifecycle methods */
   async componentDidMount() {
     socket.registerApp(this);
+    let descrambleKeyLeft = this.generateDescrambleKey(this.state.descramblerSettingLeft);
+    let descrambleKeyRight = this.generateDescrambleKey(this.state.descramblerSettingRight);
     this.setState({
       user: userService.getUser(),
-      descrambleKeyLeft: Math.floor(Math.random() * 10),
-      descrambleKeyRight: Math.floor(Math.random() * 10),
+      descrambleKeyLeft,
+      descrambleKeyRight,
     })
     await socket.joinChat(this.props.match.params.id)
     if (this.state.chat) {
@@ -50,6 +52,10 @@ class ChatPage extends React.Component {
     this.setState({
       scrambledMessages: newScrambledMessages,
     })
+  }
+
+  generateDescrambleKey(descramblerSetting) {
+    return chatService.generateDescrambleKey(descramblerSetting);
   }
 
   getScrambleKey() {

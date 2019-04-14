@@ -69,42 +69,23 @@ function scrambleAllOrNewMessages(messages, scrambledMessages, key, randChars) {
 
 function getScrambleKey(chalRat, descrambSetL, descrambSetR, descrambKeyL, descrambKeyR) {
   if (descrambSetL === descrambKeyL && descrambSetR === descrambKeyR) return 10;
-  let offLeft, offRight, leftRange = [], rightRange = [];
-  switch (chalRat) {
-    case 0:
-      offLeft = Math.abs(descrambSetL - descrambKeyL);
-      offRight = Math.abs(descrambSetR - descrambKeyR);
-      break;
-    case 1:
-      leftRange.push(Math.abs(descrambSetL + 1 - descrambKeyL))
-      leftRange.push(Math.abs(descrambSetL - descrambKeyL))
-      leftRange.push(Math.abs(descrambSetL - 1 - descrambKeyL))
-      rightRange.push(Math.abs(descrambSetR + 1 - descrambKeyR))
-      rightRange.push(Math.abs(descrambSetR - descrambKeyR))
-      rightRange.push(Math.abs(descrambSetR - 1 - descrambKeyR))
-      offLeft = Math.min(...leftRange);
-      offRight = Math.min(...rightRange);
-      break;
-    case 2:
-      leftRange.push(Math.abs(descrambSetL + 2 - descrambKeyL))
-      leftRange.push(Math.abs(descrambSetL + 1 - descrambKeyL))
-      leftRange.push(Math.abs(descrambSetL - descrambKeyL))
-      leftRange.push(Math.abs(descrambSetL - 1 - descrambKeyL))
-      leftRange.push(Math.abs(descrambSetL - 2 - descrambKeyL))
-      rightRange.push(Math.abs(descrambSetR + 2 - descrambKeyR))
-      rightRange.push(Math.abs(descrambSetR + 1 - descrambKeyR))
-      rightRange.push(Math.abs(descrambSetR - descrambKeyR))
-      rightRange.push(Math.abs(descrambSetR - 1 - descrambKeyR))
-      rightRange.push(Math.abs(descrambSetR - 2 - descrambKeyR))
-      offLeft = Math.min(...leftRange);
-      offRight = Math.min(...rightRange);
-      break;
-    default:
-      break;
+  let offLeft, offRight
+  const leftRange = []; 
+  const rightRange = [];
+  const DIVISOR = 1.25;
+  for (let i = 0; i <= chalRat; i++) {
+    leftRange.push(Math.abs(descrambSetL + i - descrambKeyL))
+    leftRange.push(Math.abs(descrambSetL - i - descrambKeyL))
+    rightRange.push(Math.abs(descrambSetR + i - descrambKeyR))
+    rightRange.push(Math.abs(descrambSetR - i - descrambKeyR))
   }
-  const num = (Math.floor((10 - offLeft - offRight > 0 ? 10 - offLeft - offRight : 0)/1.1));
-  if (num) return num;
-  return 1;
+  offLeft = Math.min(...leftRange);
+  offRight = Math.min(...rightRange)
+  return ( 
+    (10 - offLeft - offRight)/DIVISOR >= 1 
+      ? Math.floor((10 - offLeft - offRight)/DIVISOR)
+      : 1
+  );
 }
 
 function reScrambleAllMessages(messages, key, randChars) {
@@ -125,6 +106,15 @@ function reScrambleAllMessages(messages, key, randChars) {
   return scrambledMessages;
 }
 
+function generateDescrambleKey(descrambleSetting) {
+  let descrambleKey;
+  do {
+    descrambleKey = Math.floor(Math.random()*10)
+  }
+  while (descrambleKey === descrambleSetting)
+  return descrambleKey;
+}
+
 export default {
   create,
   submitMessage,
@@ -132,4 +122,5 @@ export default {
   scrambleAllOrNewMessages,
   getScrambleKey,
   reScrambleAllMessages,
+  generateDescrambleKey,
 };

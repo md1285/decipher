@@ -16,39 +16,68 @@ class ChatPage extends React.Component {
     chat: null,
     serverMessage: '',
     user: '',
-    scrambleKey: 3,
+    descrambleKeyLeft: 0,
+    descrambleKeyRight: 0,
+    descramblerSettingLeft: 4,
+    descramblerSettingRight: 4,
+    challengeRating: 0,
     scrambledMessages: [],
   };
 
+  /* lifecycle methods */
   async componentDidMount() {
     socket.registerApp(this);
-    this.setState({ user: userService.getUser() })
+    this.setState({
+      user: userService.getUser(),
+      descrambleKeyLeft: Math.floor(Math.random() * 10),
+      descrambleKeyRight: Math.floor(Math.random() * 10),
+    })
     await socket.joinChat(this.props.match.params.id)
     if (this.state.chat) {
-      this.setState({ messages: this.state.chat.messages })
+      await this.setState({
+        messages: this.state.chat.messages,
+      })
       this.scrambleMessages();
     }
   }
 
-  // componentWillReceiveProps(props) {
-  //   this.scrambleMessages(props);
-  // }
-
-
 
   /* helper functions */
   scrambleMessages() {
-    const newScrambledMessages = chatService.scrambleAllOrNewMessages(this.state.messages, this.state.scrambledMessages, this.state.scrambleKey, randChars);
+    let scrambleKey =  this.getScrambleKey();
+      console.log('sk: ' + scrambleKey)
+    const newScrambledMessages = chatService.scrambleAllOrNewMessages(this.state.messages, this.state.scrambledMessages, scrambleKey, randChars);
     this.setState({
       scrambledMessages: newScrambledMessages,
     })
   }
 
+  getScrambleKey() {
+    return chatService.getScrambleKey(this.state.challengeRating, this.state.descramblerSettingLeft, 
+      this.state.descramblerSettingRight, this.state.descrambleKeyLeft, this.state.descrambleKeyRight);
+  }
 
-  handleChange = e => {
-    this.setState({
-      [e.target.name]: e.target.value
-    });
+  reScrambleAllMessages() {
+    const key = this.getScrambleKey();
+    console.log(key)
+    const scrambledMessages = chatService.reScrambleAllMessages(this.state.messages, key, randChars);
+    this.setState({scrambledMessages});
+  }
+
+
+  /* handlers */
+  handleChange = async e => {
+    if (e.target.name === 'descramblerSettingLeft' || e.target.name === 'descramblerSettingRight') {
+      let value = parseInt(e.target.value);
+      await this.setState({
+        [e.target.name]: value
+      });
+      this.reScrambleAllMessages();
+    } else {
+      this.setState({
+        [e.target.name]: e.target.value
+      });
+    }
   };
 
   handleSubmit = async e => {
@@ -62,7 +91,6 @@ class ChatPage extends React.Component {
       this.setState({ serverMessage: err })
     }
     this.setState({ content: '' })
-    // this.scrambleMessages();
   };
 
   render() {
@@ -82,13 +110,14 @@ class ChatPage extends React.Component {
                 messages={this.state.messages}
                 chat={this.state.chat}
                 user={this.state.user}
-                // scrambleKey={this.state.scrambleKey}
                 scrambledMessages={this.state.scrambledMessages}
 
                 handleChange={this.handleChange}
                 handleSubmit={this.handleSubmit}
               />
-              <Descrambler />
+              <Descrambler
+                handleChange={this.handleChange}
+              />
             </>)
         }
       </div>

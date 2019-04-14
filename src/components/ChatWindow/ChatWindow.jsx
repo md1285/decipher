@@ -2,23 +2,6 @@ import React from 'react'
 
 class ChatWindow extends React.Component {
 
-  // state = {
-  //   scrambleKey: 3,
-  //   scrambledMessages: [],
-  // };
-
-  // componentDidMount() {
-  //   this.scrambleMessages(this.props);
-  // }
-
-  // componentWillReceiveProps(props) {
-  //   this.scrambleMessages(props);
-  // }
-
-
-
-
-
   render() {
     return (
       <div>

@@ -9,8 +9,8 @@ function registerApp(chat) {
 
 
 // Listen for messages from server
-socket.on('new-message', function(chat){
-  ChatPage.setState({
+socket.on('new-message', async function(chat){
+  await ChatPage.setState({
     messages: chat.messages,
     chat: true,
   });

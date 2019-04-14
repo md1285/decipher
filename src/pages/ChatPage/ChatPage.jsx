@@ -42,12 +42,10 @@ class ChatPage extends React.Component {
       this.scrambleMessages();
     }
   }
-
-
+  
   /* helper functions */
   scrambleMessages() {
-    let scrambleKey =  this.getScrambleKey();
-      console.log('sk: ' + scrambleKey)
+    let scrambleKey = this.getScrambleKey();
     const newScrambledMessages = chatService.scrambleAllOrNewMessages(this.state.messages, this.state.scrambledMessages, scrambleKey, randChars);
     this.setState({
       scrambledMessages: newScrambledMessages,
@@ -59,7 +57,7 @@ class ChatPage extends React.Component {
   }
 
   getScrambleKey() {
-    return chatService.getScrambleKey(this.state.challengeRating, this.state.descramblerSettingLeft, 
+    return chatService.getScrambleKey(this.state.challengeRating, this.state.descramblerSettingLeft,
       this.state.descramblerSettingRight, this.state.descrambleKeyLeft, this.state.descrambleKeyRight);
   }
 
@@ -67,7 +65,7 @@ class ChatPage extends React.Component {
     const key = this.getScrambleKey();
     console.log(key)
     const scrambledMessages = chatService.reScrambleAllMessages(this.state.messages, key, randChars);
-    this.setState({scrambledMessages});
+    this.setState({ scrambledMessages });
   }
 
 

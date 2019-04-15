@@ -1,6 +1,6 @@
 .descrambler-container {
-  height: 20vh;
-  width: 22.22vh;
+  height: 22vh;
+  width: 24.44vh;
   display: grid;
   grid-template-columns: repeat(10, 1fr);
   grid-template-rows: repeat(9, 1fr);

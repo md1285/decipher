@@ -61,19 +61,28 @@ class ChatsPage extends React.Component {
             ))}
 
           </div>
-          <button
-            onClick={this.handleCreateChat}
-          >Create Chat</button>
-          <form onSubmit={this.handleJoinChat}>
-            <input
-              type='text'
-              name='code'
-              placeholder='Enter invite code'
-              value={this.state.code}
-              onChange={this.handleChange}
-            />
-            <button type='submit'>Join Chat</button>
-          </form>
+          <div className={styles.submitAndCreateWrapper}>
+            <form
+              className={styles.form}
+              onSubmit={this.handleJoinChat}>
+              <input
+                className={styles.textInput}
+                type='text'
+                name='code'
+                placeholder='Enter chat invite code'
+                value={this.state.code}
+                onChange={this.handleChange}
+              />
+              <button 
+              disabled={!this.state.code}
+              className='button-green'
+              type='submit'>Join</button>
+            </form>
+            <button
+              className='button-green'
+              onClick={this.handleCreateChat}
+            >New Chat</button>
+          </div>
         </div>
       </div>
     )

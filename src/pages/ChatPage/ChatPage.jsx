@@ -106,11 +106,29 @@ class ChatPage extends React.Component {
     this.setState({ content: '' })
   };
 
+  handleBackButtonClick = () => {
+    this.props.history.push('/chats')
+  }
+
   render() {
     return (
       <div className={styles.chatContainer}>
         <div className={styles.chatWrapper}>
-          {this.state.chat === false && <div>Inactive Code</div>}
+          {this.state.chat === false &&
+          <div className={styles.errorPageWrapper}>
+            <div className='h1ContainerWrapper'>
+              <div className='h1Container'>
+                <div
+                  className='h1'
+                >INVALID CODE</div>
+              </div>
+            </div>
+            <button
+              onClick={this.handleBackButtonClick}
+              className={`button-green ${styles.backButton}`}
+            >Back</button>
+          </div>
+          }
           {this.state.chat === true &&
             (this.state.serverMessage
               ?
@@ -131,12 +149,12 @@ class ChatPage extends React.Component {
                   handleSubmit={this.handleSubmit}
                 />
                 <div className={styles.footer}>
-                <Descrambler
-                  descramblerSettingLeft={this.state.descramblerSettingLeft}
-                  descramblerSettingRight={this.state.descramblerSettingRight}
+                  <Descrambler
+                    descramblerSettingLeft={this.state.descramblerSettingLeft}
+                    descramblerSettingRight={this.state.descramblerSettingRight}
 
-                  handleChange={this.handleChange}
-                />
+                    handleChange={this.handleChange}
+                  />
                 </div>
               </>)
           }

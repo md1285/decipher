@@ -1,0 +1,40 @@
+.submitAndCreateWrapper {
+  height: 8vh;
+  width: 100%;
+  padding: 5px 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.form {
+  width: 75%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.textInput {
+  width: 75%;
+  height: 60%;
+  font-size: 16px;
+  border: 1.5px solid black;
+  border-right: none;
+  padding: 0 10px;
+}
+
+.textInputEmpty {
+  width: 75%;
+  height: 60%;
+  font-size: 16px;
+  padding: 0 10px;
+  border: 0.5px solid black;
+}
+
+@media only screen and (max-width: 800px) {
+  .form {
+    width: 100%;
+  }
+}

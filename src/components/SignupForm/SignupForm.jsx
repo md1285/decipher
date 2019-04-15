@@ -1,5 +1,6 @@
 import React from 'react';
 import userService from '../../utils/userService'
+import styles from './SignupForm.module.css'
 
 class SignupForm extends React.Component {
   state = {
@@ -20,7 +21,7 @@ class SignupForm extends React.Component {
     try {
       await userService.signup(this.state);
       this.props.handleSignupOrLogin();
-      this.props.history.push('/');
+      this.props.history.push('/chats');
     } catch (err) {
       this.props.handleError(err.message);
     }
@@ -32,10 +33,13 @@ class SignupForm extends React.Component {
 
   render() {
     return (
+      <div className={styles.formWrapper}>
       <form
+        className={styles.form}
         onSubmit={this.handleSubmit}
       >
         <input
+          className={styles.textInput}
           type='text'
           name='userName'
           placeholder='Username'
@@ -43,6 +47,7 @@ class SignupForm extends React.Component {
           onChange={this.handleChange}
         />
         <input
+          className={styles.textInput}
           type='email'
           name='email'
           placeholder='Email address'
@@ -50,6 +55,7 @@ class SignupForm extends React.Component {
           onChange={this.handleChange}
         />
         <input
+          className={styles.textInput}
           type='password'
           name='password'
           placeholder='Password'
@@ -57,6 +63,7 @@ class SignupForm extends React.Component {
           onChange={this.handleChange}
         />
         <input
+          className={styles.textInput}
           type='password'
           name='passwordConf'
           placeholder='Confirm Password'
@@ -64,11 +71,13 @@ class SignupForm extends React.Component {
           onChange={this.handleChange}
         />
         <button
+          className={`button-green ${styles.signupButton}`}
           type='submit'
           disabled={this.isFormInvalid()}
         >Sign Up
         </button>
       </form>
+      </div>
     );
   }
 }

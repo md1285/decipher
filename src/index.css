@@ -83,3 +83,36 @@
 .inner-content-a:hover{
   color: limegreen;
 }
+
+.button-green {
+  width: 150px;
+  height: 60%;
+  font-family: 'Bungee Hairline', cursive;
+  font-size: 16px;
+
+  background-color: limegreen;
+  color: white;
+  text-shadow: 0 0 10px #000;
+  font-weight: 900;
+  border: 1.5px solid black;
+}
+
+.button-green:hover {
+  cursor: pointer;
+}
+
+
+.button-green:disabled {
+  background-color: #E8E9EE;
+  border: 0.5px solid black;
+  color: grey;
+  text-shadow: 0 0 10px #fff;
+  cursor: default;
+}
+
+
+@media only screen and (max-width: 800px) {
+  .button-green {
+    width: 100px;
+  }
+}

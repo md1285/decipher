@@ -58,7 +58,7 @@ class ChatWindow extends React.Component {
             onChange={this.props.handleChange}
           />
           <button
-            className={styles.formButton}
+            className='button-green'
             type='submit'
             disabled={this.props.content === ''}
           >Submit</button>

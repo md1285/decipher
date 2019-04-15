@@ -9,11 +9,14 @@ class ChatWindow extends React.Component {
         <div className='h1ContainerWrapper'>
           <div className='h1Container'>
             <div></div>
-            <h1 className='h1'>DECIPHER</h1>
-            {/* <p>Join Code: {this.props.}</p> */}
+            <h1 className={styles.h1}>DECIPHER</h1>
           </div>
         </div>
-
+        <div className={styles.chatCodeDisplay}>
+        <div>
+        Invite code: {this.props.match.params.id}
+        </div>
+        </div>
         <div id='chat-window-messages-container' className={styles.messagesContainer}>
           {this.props.messages.map((m, i) => (
             <div

@@ -68,7 +68,7 @@ class ChatsPage extends React.Component {
             <input
               type='text'
               name='code'
-              placeholder='Enter chat code'
+              placeholder='Enter invite code'
               value={this.state.code}
               onChange={this.handleChange}
             />

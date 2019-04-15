@@ -42,12 +42,8 @@ async function getChat(req, res) {
 }
 
 async function getAllChats(req, res) {
-  const chats = await Chat.find({ users: { $in: [req.user] } }).populate('users');
-
-  // chats.forEach(chat => {
-  //   chat.updatedAt = chat.updatedAt.toLocaleDateString();
-  //   console.log(chat.updatedAt.getDate())
-  // });
-  // console.log(chats);
+  const chats = await Chat.find({ users: { $in: [req.user] } })
+  .populate('users')
+  .sort('-updatedAt');
   res.json(chats);
 }

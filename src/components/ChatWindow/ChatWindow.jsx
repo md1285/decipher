@@ -3,19 +3,19 @@ import styles from './ChatWindow.module.css'
 
 class ChatWindow extends React.Component {
 
+
   render() {
     return (
       <div className={styles.ChatWindow}>
         <div className='h1ContainerWrapper'>
           <div className='h1Container'>
-            <div></div>
             <h1 className={styles.h1}>DECIPHER</h1>
           </div>
         </div>
         <div className={styles.chatCodeDisplay}>
-        <div>
-        Invite code: {this.props.match.params.id}
-        </div>
+          <div>
+            Invite code: {this.props.match.params.id}
+          </div>
         </div>
         <div id='chat-window-messages-container' className={styles.messagesContainer}>
           {this.props.messages.map((m, i) => (
@@ -47,10 +47,10 @@ class ChatWindow extends React.Component {
           <input
             className={
               this.props.content
-              ?
-              styles.textInput
-              :
-              styles.textInputEmpty
+                ?
+                styles.textInput
+                :
+                styles.textInputEmpty
             }
             type='text'
             name='content'

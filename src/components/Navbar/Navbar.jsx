@@ -3,7 +3,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import styles from './Navbar.module.css'
 import logo from '../../imgs/logo.png'
-import tokenService from '../../utils/tokenService'
+import userService from '../../utils/userService'
 
 const Navbar = (props) => {
   const nav = props.user
@@ -11,7 +11,7 @@ const Navbar = (props) => {
     <div className={styles.NavbarWrapper}>
       <div className={styles.logoWrapper}>
         <NavLink
-            to={tokenService.getUserFromToken()
+            to={userService.getUser()
             ?
             '/chats'
             :
@@ -33,7 +33,7 @@ const Navbar = (props) => {
     <div className={styles.NavbarWrapper}>
       <div className={styles.logoWrapper}>
       <NavLink
-            to={tokenService.getUserFromToken()
+            to={userService.getUser()
             ?
             '/chats'
             :

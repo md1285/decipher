@@ -38,7 +38,11 @@ class App extends Component {
           <Route
             exact path='/'
             render={() => (
-              <h1>App.jsx</h1>
+              this.state.user
+              ?
+              <Redirect to='/chats/' />
+              :
+              <Redirect to='/about' />
             )}
           />
 

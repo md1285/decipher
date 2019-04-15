@@ -25,3 +25,14 @@
   padding: 2vh 0;
   border: 2px solid white;
 }
+
+@media only screen and (max-width: 700px) {
+  .h1 {
+    font-size: 1.25em;
+    /* font-size: 2vw; */
+    padding: 1.25vh 0;
+    height: 8vh;
+    border: 2px solid white;
+  }
+  
+}

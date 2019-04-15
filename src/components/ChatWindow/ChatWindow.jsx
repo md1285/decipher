@@ -7,7 +7,7 @@ class ChatWindow extends React.Component {
     return (
       <div className={styles.ChatWindow}>
 
-        <h1 className={styles.h1}>Chat Page {this.props.match.params.id}</h1>
+        <h1 className={styles.h1}>ChatID: {this.props.match.params.id}</h1>
         <div id='chat-window-messages-container' className={styles.messagesContainer}>
           {this.props.messages.map((m, i) => (
             <div

@@ -25,4 +25,13 @@
   color: white;
   text-decoration: none;
   margin: 0 2vw;
+  font-family: 'Bungee Hairline', cursive;
+  font-weight: 900;
+  text-shadow: 0 0 20px #fff;
+}
+
+.link:hover {
+  color: limegreen;
+  text-shadow: 0 0 20px limegreen;
+
 }

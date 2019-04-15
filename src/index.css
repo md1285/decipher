@@ -8,9 +8,9 @@
 .App {
   background: linear-gradient(
     to bottom,
-    #9E9A95,
+    black,
     white,
-    black
+    #9E9A95
   );
     /* to right bottom,
     silver,

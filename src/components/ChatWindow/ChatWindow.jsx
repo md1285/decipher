@@ -12,17 +12,26 @@ class ChatWindow extends React.Component {
         <div id='chat-window-messages-container' className={styles.messagesContainer}>
           {this.props.messages.map((m, i) => (
             <div
-
+              class={styles.message}
               key={m._id}
-              style={{backgroundColor: 'white'}}
-              // style={
-              //   this.props.user._id === m.user
-              //     ?
-              //     { backgroundColor: 'red' }
-              //     :
-              //     { backgroundColor: 'green' }
-              // }
-            >{m.userName}: {this.props.user._id === m.user || this.props.descrambledForUser ? m.content : this.props.scrambledMessages[i]}</div>
+              style={
+                this.props.user._id === m.user
+                  ?
+                  {
+                    color: 'white',
+                    backgroundColor: 'black'
+                  }
+                  :
+                  {
+                    color: 'limegreen',
+                    backgroundColor: 'black'
+                  }
+              }
+            >
+              <p className={styles.p}>
+                {m.userName}: {this.props.user._id === m.user || this.props.descrambledForUser ? m.content : this.props.scrambledMessages[i]}
+              </p>
+            </div>
           ))}
         </div>
         <form

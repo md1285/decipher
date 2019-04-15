@@ -6,10 +6,10 @@ class ChatWindow extends React.Component {
   render() {
     return (
       <div className={styles.ChatWindow}>
-        <div className={styles.h1ContainerWrapper}>
-          <div className={styles.h1Container}>
+        <div className='h1ContainerWrapper'>
+          <div className='h1Container'>
             <div></div>
-            <h1 className={styles.h1}>DECIPHER</h1>
+            <h1 className='h1'>DECIPHER</h1>
             {/* <p>Join Code: {this.props.}</p> */}
           </div>
         </div>

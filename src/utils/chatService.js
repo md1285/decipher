@@ -12,10 +12,10 @@ function create() {
     },
     // body: JSON.stringify({content: 'none'}),
   })
-  .then(res => {
-    if (res.ok) return res.json();
-    throw new Error('There was an error creating chat');
-  });
+    .then(res => {
+      if (res.ok) return res.json();
+      throw new Error('There was an error creating chat');
+    });
 }
 
 
@@ -36,15 +36,15 @@ function scrambleAllOrNewMessages(messages, scrambledMessages, key, randChars) {
   messages.forEach((message, idx) => {
     if (!scrambledMessages[idx]) {
       let newScrambledMessage = message.content
-      .split('')
-      .map((char, charIdx) => {
-        if (charIdx % key === 0 && key !== 10) {
-          return randChars[Math.floor(Math.random() * randChars.length)];
-        } else {
-          return char;
-        }
-      })
-      .join('');
+        .split('')
+        .map((char, charIdx) => {
+          if (charIdx % key === 0 && key !== 10) {
+            return randChars[Math.floor(Math.random() * randChars.length)];
+          } else {
+            return char;
+          }
+        })
+        .join('');
       scrambledMessages.push(newScrambledMessage);
     }
   });
@@ -54,7 +54,7 @@ function scrambleAllOrNewMessages(messages, scrambledMessages, key, randChars) {
 function getScrambleKey(chalRat, descrambSetL, descrambSetR, descrambKeyL, descrambKeyR) {
   if (descrambSetL === descrambKeyL && descrambSetR === descrambKeyR) return 10;
   let offLeft, offRight
-  const leftRange = []; 
+  const leftRange = [];
   const rightRange = [];
   const DIVISOR = 1.25;
   for (let i = 0; i <= chalRat; i++) {
@@ -65,9 +65,9 @@ function getScrambleKey(chalRat, descrambSetL, descrambSetR, descrambKeyL, descr
   }
   offLeft = Math.min(...leftRange);
   offRight = Math.min(...rightRange)
-  return ( 
-    (10 - offLeft - offRight)/DIVISOR >= 1 
-      ? Math.floor((10 - offLeft - offRight)/DIVISOR)
+  return (
+    (10 - offLeft - offRight) / DIVISOR >= 1
+      ? Math.floor((10 - offLeft - offRight) / DIVISOR)
       : 1
   );
 }
@@ -75,7 +75,7 @@ function getScrambleKey(chalRat, descrambSetL, descrambSetR, descrambKeyL, descr
 function reScrambleAllMessages(messages, key, randChars) {
   let scrambledMessages = [];
   messages.forEach((message) => {
-      let newScrambledMessage = message.content
+    let newScrambledMessage = message.content
       .split('')
       .map((char, charIdx) => {
         if (charIdx % key === 0 && key !== 10) {
@@ -85,7 +85,7 @@ function reScrambleAllMessages(messages, key, randChars) {
         }
       })
       .join('');
-      scrambledMessages.push(newScrambledMessage);
+    scrambledMessages.push(newScrambledMessage);
   });
   return scrambledMessages;
 }
@@ -93,7 +93,7 @@ function reScrambleAllMessages(messages, key, randChars) {
 function generateDescrambleKey(descrambleSetting) {
   let descrambleKey;
   do {
-    descrambleKey = Math.floor(Math.random()*10)
+    descrambleKey = Math.floor(Math.random() * 10)
   }
   while (descrambleKey === descrambleSetting)
   return descrambleKey;
@@ -106,12 +106,12 @@ function addUserToDescrambledFor(chatId) {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + tokenService.getToken(),
     },
-    body: JSON.stringify({chatId}),
+    body: JSON.stringify({ chatId }),
   })
-  .then(res => {
-    if (res.ok) return;
-    throw new Error('There was an error adding the user');
-  });
+    .then(res => {
+      if (res.ok) return;
+      throw new Error('There was an error adding the user');
+    });
 }
 
 function getAllChats() {
@@ -122,10 +122,10 @@ function getAllChats() {
       'Authorization': 'Bearer ' + tokenService.getToken(),
     },
   })
-  .then(res => {
-    if (res.ok) return res.json();
-    throw new Error('Unable to retrieve chats');
-  });
+    .then(res => {
+      if (res.ok) return res.json();
+      throw new Error('Unable to retrieve chats');
+    });
 }
 
 export default {

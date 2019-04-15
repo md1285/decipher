@@ -2,12 +2,18 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
+}
+
+.h1ContainerWrapper {
+  height: 8vh;
+  display: flex;
+  align-items: flex-end;
 }
 
 .h1Container {
+  height: 80%;
   background-color: red;
-  height: 8vh;
   width: 65vw;
   border: 2px solid white;
   display: flex;
@@ -18,9 +24,9 @@
 .h1 {
   font-size: 3.75em;
   /* padding: 1.25vh 0; */
-  color: white;
   font-family: 'Bungee Hairline', cursive;
   font-weight: 900;
+  color: white;
   text-shadow: 0 0 10px #fff;
 
 }
@@ -28,8 +34,10 @@
 .messagesContainer {
   overflow-y: auto;
   border: 2px solid green;
+  min-height: 50vh;
   max-height: 50vh;
   width: 65vw;
+  background-color: black;
 }
 
 .message {
@@ -46,8 +54,45 @@
 
 .form {
   height: 8vh;
-  padding: 2vh 0;
-  border: 2px solid white;
+  width: 100%;
+  padding: 5px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.textInput {
+  width: 75%;
+  height: 60%;
+  font-size: 16px;
+  padding: 0 10px;
+  border: 1.5px solid black;
+}
+
+.textInputEmpty {
+  width: 75%;
+  height: 60%;
+  font-size: 16px;
+  padding: 0 10px;
+  border: 0.5px solid black;
+}
+
+.formButton {
+  width: 20%;
+  height: 60%;
+  font-family: 'Bungee Hairline', cursive;
+  font-size: 16px;
+  background-color: limegreen;
+  color: white;
+  text-shadow: 0 0 10px #fff;
+  font-weight: 900;
+  border: 1.5px solid black;
+}
+
+.formButton:disabled {
+  background-color: #E8E9EE;
+  border: 0.5px solid black;
+  color: grey;
 }
 
 @media only screen and (max-width: 700px) {

@@ -6,9 +6,14 @@ class ChatWindow extends React.Component {
   render() {
     return (
       <div className={styles.ChatWindow}>
-        <div className={styles.h1Container}>
-          <h1 className={styles.h1}>DECIPHER</h1>
+        <div className={styles.h1ContainerWrapper}>
+          <div className={styles.h1Container}>
+            <div></div>
+            <h1 className={styles.h1}>DECIPHER</h1>
+            {/* <p>Join Code: {this.props.}</p> */}
+          </div>
         </div>
+
         <div id='chat-window-messages-container' className={styles.messagesContainer}>
           {this.props.messages.map((m, i) => (
             <div
@@ -19,12 +24,10 @@ class ChatWindow extends React.Component {
                   ?
                   {
                     color: 'white',
-                    backgroundColor: 'black'
                   }
                   :
                   {
                     color: 'limegreen',
-                    backgroundColor: 'black'
                   }
               }
             >
@@ -39,12 +42,20 @@ class ChatWindow extends React.Component {
           onSubmit={this.props.handleSubmit}
         >
           <input
+            className={
+              this.props.content
+              ?
+              styles.textInput
+              :
+              styles.textInputEmpty
+            }
             type='text'
             name='content'
             value={this.props.content}
             onChange={this.props.handleChange}
           />
           <button
+            className={styles.formButton}
             type='submit'
             disabled={this.props.content === ''}
           >Submit</button>

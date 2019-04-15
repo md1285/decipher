@@ -7,6 +7,12 @@ class LoginPage extends React.Component {
     message: ''
   };
 
+  handleInvalid = () => {
+    this.setState({
+      message: 'Invalid credentials.'
+    })
+  };
+
   render() {
     return (
       <div className='page-wrapper'>
@@ -20,6 +26,8 @@ class LoginPage extends React.Component {
           </div>
           <LoginForm
             {...this.props}
+            
+            handleInvalid={this.handleInvalid}
           />
           <div>{this.state.message}</div>
         </div>

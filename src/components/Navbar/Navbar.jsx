@@ -1,14 +1,24 @@
 import React from 'react';
+
 import { NavLink } from 'react-router-dom';
 import styles from './Navbar.module.css'
 import logo from '../../imgs/logo.png'
+import tokenService from '../../utils/tokenService'
 
 const Navbar = (props) => {
   const nav = props.user
     ?
     <div className={styles.NavbarWrapper}>
       <div className={styles.logoWrapper}>
-          <NavLink to='/'><img className={styles.logoImage} src={logo} alt='logo' /></NavLink>
+        <NavLink
+            to={tokenService.getUserFromToken()
+            ?
+            '/chats'
+            :
+            '/about'
+          }
+        >
+          <img className={styles.logoImage} src={logo} alt='logo' /></NavLink>
       </div>
       <div>
         <NavLink className={styles.link} to='/about'>About</NavLink>
@@ -22,7 +32,15 @@ const Navbar = (props) => {
     :
     <div className={styles.NavbarWrapper}>
       <div className={styles.logoWrapper}>
-        <NavLink to='/'><img className={styles.logoImage} src={logo} alt='logo' /></NavLink>
+      <NavLink
+            to={tokenService.getUserFromToken()
+            ?
+            '/chats'
+            :
+            '/about'
+          }
+        >
+          <img className={styles.logoImage} src={logo} alt='logo' /></NavLink>
       </div>
       <div>
         <NavLink className={styles.link} to='/about'>About</NavLink>

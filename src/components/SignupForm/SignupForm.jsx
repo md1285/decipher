@@ -34,49 +34,49 @@ class SignupForm extends React.Component {
   render() {
     return (
       <div className={styles.formWrapper}>
-      <form
-        className={styles.form}
-        onSubmit={this.handleSubmit}
-      >
-        <input
-          className={styles.textInput}
-          type='text'
-          name='userName'
-          placeholder='Username'
-          value={this.state.userName}
-          onChange={this.handleChange}
-        />
-        <input
-          className={styles.textInput}
-          type='email'
-          name='email'
-          placeholder='Email address'
-          value={this.state.email}
-          onChange={this.handleChange}
-        />
-        <input
-          className={styles.textInput}
-          type='password'
-          name='password'
-          placeholder='Password'
-          value={this.state.password}
-          onChange={this.handleChange}
-        />
-        <input
-          className={styles.textInput}
-          type='password'
-          name='passwordConf'
-          placeholder='Confirm Password'
-          value={this.state.passwordConf}
-          onChange={this.handleChange}
-        />
-        <button
-          className={`button-green ${styles.signupButton}`}
-          type='submit'
-          disabled={this.isFormInvalid()}
-        >Sign Up
+        <form
+          className={styles.form}
+          onSubmit={this.handleSubmit}
+        >
+          <input
+            className={styles.textInput}
+            type='text'
+            name='userName'
+            placeholder='Username'
+            value={this.state.userName}
+            onChange={this.handleChange}
+          />
+          <input
+            className={styles.textInput}
+            type='email'
+            name='email'
+            placeholder='Email address'
+            value={this.state.email}
+            onChange={this.handleChange}
+          />
+          <input
+            className={styles.textInput}
+            type='password'
+            name='password'
+            placeholder='Password'
+            value={this.state.password}
+            onChange={this.handleChange}
+          />
+          <input
+            className={styles.textInput}
+            type='password'
+            name='passwordConf'
+            placeholder='Confirm Password'
+            value={this.state.passwordConf}
+            onChange={this.handleChange}
+          />
+          <button
+            className={`button-green ${styles.signupButton}`}
+            type='submit'
+            disabled={this.isFormInvalid()}
+          >Submit
         </button>
-      </form>
+        </form>
       </div>
     );
   }

@@ -22,7 +22,7 @@ const Navbar = (props) => {
     :
     <div className={styles.NavbarWrapper}>
       <div className={styles.logoWrapper}>
-        <NavLink to='/'><img className={styles.logoImage} src='./imgs/logo.png' alt='logo' /></NavLink>
+        <NavLink to='/'><img className={styles.logoImage} src={logo} alt='logo' /></NavLink>
       </div>
       <div>
         <NavLink className={styles.link} to='/about'>About</NavLink>

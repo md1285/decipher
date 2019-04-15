@@ -6,16 +6,13 @@
 }
 
 .App {
-  background: linear-gradient(
+  /* background: linear-gradient(
     to bottom,
     black,
     white,
     #9E9A95
-  );
-    /* to right bottom,
-    silver,
-    white, */
-    /* black, */
-  /* ); */
+  ); */
+  background: #E9EAEE;
+
   height: 100vh;
 }

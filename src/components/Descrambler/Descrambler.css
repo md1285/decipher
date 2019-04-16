@@ -14,10 +14,10 @@
   grid-template-areas: 
     ". . . l4 . . l5 . . ."
     ". . . . . . . . . ."
-    ". l3 . . . . . . l6 ."
-    ". . . . . . . . . ."
-    "l2 . . . . . . . . l7"
-    ". . . . . . . . . ."
+    ". l3 . num-l num-l num-l num-l . l6 ."
+    ". . . num-l num-l num-l num-l . . ."
+    "l2 . . num-l num-l num-l num-l . . l7"
+    ". . . num-l num-l num-l num-l . . ."
     ". l1 . . . . . . l8 ."
     ". . . . . . . . . ."
     ". . . l0 . . l9 . . .";
@@ -27,10 +27,10 @@
   grid-template-areas: 
     ". . . r4 . . r5 . . ."
     ". . . . . . . . . ."
-    ". r3 . . . . . . r6 ."
-    ". . . . . . . . . ."
-    "r2 . . . . . . . . r7"
-    ". . . . . . . . . ."
+    ". r3 . num-r num-r num-r num-r . r6 ."
+    ". . . num-r num-r num-r num-r . . ."
+    "r2 . . num-r num-r num-r num-r . . r7"
+    ". . . num-r num-r num-r num-r . . ."
     ". r1 . . . . . . r8 ."
     ". . . . . . . . . ."
     ". . . r0 . . r9 . . .";
@@ -45,6 +45,20 @@
   margin: .2px 0;
   font-size: 16px;
   padding: 0 5px;
+}
+
+.dcs-display-number-cont {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.dcs-display-number {
+  font-size: 3em;
+  font-family: 'Roboto Mono', monospace;
+  font-weight: 900;
+  color: black;
 }
 
 .dcs-display-number-left {

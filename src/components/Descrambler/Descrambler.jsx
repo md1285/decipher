@@ -57,7 +57,11 @@ class Descrambler extends React.Component {
             name="descramblerSettingLeft"
             onClick={this.props.handleChange}
             value="9">9</button>
-          <div className="dcs-display-number-left">4</div>
+          <div className="dcs-display-number-cont dcs-display-number-left">
+            <div className="dcs-display-number">
+              {this.props.descramblerSettingLeft}
+            </div>
+          </div>
         </div>
         <div className="descrambler-container descrambler-right-container">
           <button
@@ -110,8 +114,11 @@ class Descrambler extends React.Component {
             name="descramblerSettingRight"
             onClick={this.props.handleChange}
             value="9">9</button>
-          <div className="dcs-display-number-right">4</div>
-
+          <div className="dcs-display-number-cont dcs-display-number-right">
+          <div className="dcs-display-number">
+              {this.props.descramblerSettingRight}
+            </div>
+          </div>
         </div>
       </div>
     );

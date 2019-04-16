@@ -1,68 +1,48 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+# Decipher
+## Introduction
+Welcome to Decipher, a one-of-a-kind interactive chat experience!
 
-In the project directory, you can run:
+To start, create a chat, and send the invite code to a friend. 
 
-### `npm start`
+![Chats Page](./src/imgs/chats_page.png)
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+When a chat begins, the other person’s messages will be scrambled. To decipher them, you must adjust the settings of the dials on the bottom of your screen.
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+![Chat Page](./src/imgs/screenshot_1.png)
 
-### `npm test`
+As you get closer to the correct setting, the incoming messages will start to descramble, one character at a time. Once you crack the code, the messages will be completely descrambled.
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+![Decoded](./src/imgs/decoded.png)
 
-### `npm run build`
+We hope you enjoy Decipher!
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Technologies Used
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+Decipher is a full stack web application built using MongoDB, Express, Node, and React.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+I used the jsonwebtoken and bcrypt node modules for authentication and password hashing, React Router for client-side routing, and socket.io to facilitate real time chat features.
 
-### `npm run eject`
+Page layouts were designed using CSS Flexbox and Grid. Mongoose was used for database object modeling.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Getting Started
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+I began this project by planning my user stories using [Trello](https://trello.com/b/DO6qWiOr/decipher).
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+You can also find my initial wireframes and Entity Relationship Diagram there.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+The app is deployed on [Heroku](https://decipher-md.herokuapp.com/).
 
-## Learn More
+## Unsolved Problems
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+There are some minor issues with the styling of the descrambler dials (the buttons are not perfect circles on some screen sizes) that I would like to refactor and fix.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+I would also like to re-organize my CSS so that the use of CSS modules or standard .css files is consistent.
 
-### Code Splitting
+Additionally, currently the unscrambled messages and descrambler keys are stored in state on a React component. If a user were so inclined, they could use the React Dev Tools to spoil the fun. I would like to refactor to store these items in memory, making them more difficult to access.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+## Future Enhancements
 
-### Analyzing the Bundle Size
+Given more time, I would like to implement the ability for a user to remove themself from a chat in their chats log.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+Additionally, I would like for the application to use geolocation to calculate the physical distance between the users, and increase the scramble level based on how far away the users are.

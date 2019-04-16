@@ -51,20 +51,15 @@
 }
 
 .messagesContainer {
-  overflow-y: auto;
+  overflow-y: scroll;
   border: 2px solid white;
   border-top: none;
   height: calc(50vh - 24px);
+  height: 49vh;
   width: 100%;
   background-color: black;
 }
 
-.message {
-  background-color: black;
-  color: green;
-  font-weight: 900;
-  /* text-shadow: 0 0 10px green; */
-}
 
 .p {
   padding: 8px 10px;

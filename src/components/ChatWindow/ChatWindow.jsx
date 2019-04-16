@@ -20,7 +20,6 @@ class ChatWindow extends React.Component {
         <div id='chat-window-messages-container' className={styles.messagesContainer}>
           {this.props.messages.map((m, i) => (
             <div
-              class={styles.message}
               key={m._id}
               style={
                 this.props.user._id === m.user

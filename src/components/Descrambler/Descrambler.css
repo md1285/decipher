@@ -47,6 +47,14 @@
   padding: 0 5px;
 }
 
+.dcs-display-number-left {
+  grid-area: num-l;
+}
+
+.dcs-display-number-right {
+  grid-area: num-r;
+}
+
 
 
 .dsc-lft-0 {

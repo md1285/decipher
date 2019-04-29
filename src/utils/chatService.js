@@ -48,7 +48,7 @@ function getChat(id) {
 
 function addUserToDescrambledFor(chatId) {
   return fetch(BASE_URL + chatId, {
-    method: 'PUT',
+    method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + tokenService.getToken(),

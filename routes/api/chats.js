@@ -2,9 +2,9 @@ const express = require('express')
 const router = express.Router();
 const chatCtrl = require('../../controllers/chats');
 
+router.get('/', checkAuth, chatCtrl.getAllChats);
 router.post('/new', checkAuth, chatCtrl.create);
-router.post('/addtodescrambled', checkAuth, chatCtrl.addToDescrambled);
-router.get('/getallchats', checkAuth, chatCtrl.getAllChats);
+router.post('/:id', checkAuth, chatCtrl.addToDescrambled);
 router.get('/:id', checkAuth, chatCtrl.getChat);
 
 /* auth middleware */

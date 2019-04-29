@@ -2,6 +2,19 @@ import tokenService from '../utils/tokenService'
 
 const BASE_URL = '/api/chats/';
 
+function getAllChats() {
+  return fetch(BASE_URL, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + tokenService.getToken(),
+    },
+  })
+    .then(res => {
+      if (res.ok) return res.json();
+      throw new Error('Unable to retrieve chats');
+    });
+}
 
 function create() {
   return fetch(BASE_URL + 'new', {
@@ -29,6 +42,21 @@ function getChat(id) {
     if (res.ok) return res.json();
     throw new Error('Unable to retrieve messages');
   });
+}
+
+function addUserToDescrambledFor(chatId) {
+  return fetch(BASE_URL + chatId, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + tokenService.getToken(),
+    },
+    body: JSON.stringify({ chatId }),
+  })
+    .then(res => {
+      if (res.ok) return;
+      throw new Error('There was an error adding the user');
+    });
 }
 
 function scrambleAllOrNewMessages(messages, scrambledMessages, key, randChars) {
@@ -96,35 +124,6 @@ function generateDescrambleKey(descrambleSetting) {
   }
   while (descrambleKey === descrambleSetting)
   return descrambleKey;
-}
-
-function addUserToDescrambledFor(chatId) {
-  return fetch(BASE_URL + 'addtodescrambled', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + tokenService.getToken(),
-    },
-    body: JSON.stringify({ chatId }),
-  })
-    .then(res => {
-      if (res.ok) return;
-      throw new Error('There was an error adding the user');
-    });
-}
-
-function getAllChats() {
-  return fetch(BASE_URL + 'getallchats', {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + tokenService.getToken(),
-    },
-  })
-    .then(res => {
-      if (res.ok) return res.json();
-      throw new Error('Unable to retrieve chats');
-    });
 }
 
 export default {

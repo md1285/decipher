@@ -4,7 +4,7 @@ const chatCtrl = require('../../controllers/chats');
 
 router.get('/', checkAuth, chatCtrl.getAllChats);
 router.post('/new', checkAuth, chatCtrl.create);
-router.post('/:id', checkAuth, chatCtrl.addToDescrambled);
+router.put('/:id', checkAuth, chatCtrl.addToDescrambled);
 router.get('/:id', checkAuth, chatCtrl.getChat);
 
 /* auth middleware */

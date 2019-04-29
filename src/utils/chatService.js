@@ -2,6 +2,8 @@ import tokenService from '../utils/tokenService'
 
 const BASE_URL = '/api/chats/';
 
+
+// ajax requests
 function getAllChats() {
   return fetch(BASE_URL, {
     method: 'GET',
@@ -46,7 +48,7 @@ function getChat(id) {
 
 function addUserToDescrambledFor(chatId) {
   return fetch(BASE_URL + chatId, {
-    method: 'POST',
+    method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + tokenService.getToken(),
@@ -59,6 +61,7 @@ function addUserToDescrambledFor(chatId) {
     });
 }
 
+// game logic
 function scrambleAllOrNewMessages(messages, scrambledMessages, key, randChars) {
   messages.forEach((message, idx) => {
     if (!scrambledMessages[idx]) {
@@ -127,12 +130,14 @@ function generateDescrambleKey(descrambleSetting) {
 }
 
 export default {
+  // ajax requests
+  getAllChats,
   create,
   getChat,
+  addUserToDescrambledFor,
+  // game logic
   scrambleAllOrNewMessages,
   getScrambleKey,
   reScrambleAllMessages,
   generateDescrambleKey,
-  addUserToDescrambledFor,
-  getAllChats,
 };

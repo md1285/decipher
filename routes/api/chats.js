@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router();
 const chatCtrl = require('../../controllers/chats');
 
-router.post('/create', checkAuth, chatCtrl.create);
+router.post('/new', checkAuth, chatCtrl.create);
 router.post('/addtodescrambled', checkAuth, chatCtrl.addToDescrambled);
 router.get('/getallchats', checkAuth, chatCtrl.getAllChats);
 router.get('/getchat/:id', checkAuth, chatCtrl.getChat);

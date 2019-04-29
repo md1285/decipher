@@ -4,13 +4,12 @@ const BASE_URL = '/api/chats/';
 
 
 function create() {
-  return fetch(BASE_URL + 'create', {
+  return fetch(BASE_URL + 'new', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + tokenService.getToken(),
     },
-    // body: JSON.stringify({content: 'none'}),
   })
     .then(res => {
       if (res.ok) return res.json();

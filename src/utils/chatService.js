@@ -19,7 +19,7 @@ function create() {
 
 
 function getChat(id) {
-  return fetch(BASE_URL + `getchat/${id}`, {
+  return fetch(BASE_URL + `${id}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',

@@ -21,7 +21,7 @@ socket.on('new-message', async function(chat){
   ChatPage.scrambleMessages();
   const chatWindow = document.getElementById('chat-window-messages-container');
   chatWindow.scrollTop = chatWindow.scrollHeight;
-})
+});
 
 socket.on('inactive-code', function() {
   ChatPage.setState({chat: false});

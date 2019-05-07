@@ -12,18 +12,21 @@ const randChars = '!@#$%^&*()<>?/_'
 class ChatPage extends React.Component {
 
   state = {
-    content: '',
-    messages: [],
-    chat: null,
-    serverMessage: '',
     user: '',
+    chat: null,
+    content: '',
+
+    messages: [],
+    scrambledMessages: [],
+    descrambledForUser: false,
+
     descrambleKeyLeft: 0,
     descrambleKeyRight: 0,
     descramblerSettingLeft: 4,
     descramblerSettingRight: 4,
     challengeRating: 0,
-    scrambledMessages: [],
-    descrambledForUser: false,
+
+    serverMessage: '',
   };
 
   /* lifecycle methods */
@@ -35,18 +38,17 @@ class ChatPage extends React.Component {
       user: userService.getUser(),
       descrambleKeyLeft,
       descrambleKeyRight,
-    })
-    await socket.joinChat(this.props.match.params.id)
+    });
+    await socket.joinChat(this.props.match.params.id);
     if (this.state.chat) {
       await this.setState({
         messages: this.state.chat.messages,
-      })
+      });
       this.scrambleMessages();
     }
   }
 
   /* helper functions */
-
 
   scrambleMessages() {
     let scrambleKey = this.getScrambleKey();

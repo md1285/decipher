@@ -10,7 +10,8 @@ function init(http) {
   io = require('socket.io')(http);
   io.on('connection', function(socket) {
 
-    // all listeners here
+  // all listeners below
+
     socket.on('new-message', async function({content, id, token}) {
       const chat = await Chat.findById(id).populate('users');
       const user = await validateToken(token);
@@ -27,7 +28,7 @@ function init(http) {
         socket.join(chat._id, function() {
           io.to(chat._id).emit('new-message', chat);
         });
-
+      // if user is not authorized on chat
       } else {
         const code = Math.random().toString(16).substr(2,)
         socket.join(`unauthorized-user-${code}`, function() {
@@ -37,26 +38,28 @@ function init(http) {
     })
 
     socket.on('join-chat', async function({code, token}){
+      let chat;
+
       try {
-        const chat = await Chat.findById(code).populate('users descrambledFor');
-        const user = await validateToken(token);
-        if (!user) return;
-        if (!chat.users.map(u => u.id).includes(user._id)) {
-          chat.users.push(user._id)
-          await chat.save()
-        }
-        socket.join(chat._id, function() {
-          io.to(chat._id).emit('new-message', chat)
-        });
-      } catch (err){
+        chat = await Chat.findById(code).populate('users descrambledFor');
+      } catch {
         const roomCode = Math.random().toString(16).substr(2,)
         socket.join(`inactive-code-${roomCode}`, function(){
           io.to(`inactive-code-${roomCode}`).emit('inactive-code')
         });
       }
+      
+      const user = await validateToken(token);
+      if (!user) return;
+      if (!chat.users.map(u => u.id).includes(user._id)) {
+        chat.users.push(user._id)
+        await chat.save()
+      }
+      socket.join(chat._id, function() {
+        io.to(chat._id).emit('new-message', chat)
+      });
+
     });
-
-
   });
 }
 

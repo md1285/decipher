@@ -3,7 +3,6 @@ import styles from './ChatWindow.module.css'
 
 class ChatWindow extends React.Component {
 
-
   render() {
     return (
       <div className={styles.ChatWindow}>

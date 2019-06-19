@@ -31,7 +31,7 @@ app.use(require('./config/auth'))
 app.use('/api/chats', require('./routes/api/chats'));
 
 // catch-all route
-app.get('*', function(req, res){
+app.get('/*', function(req, res){
     res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
